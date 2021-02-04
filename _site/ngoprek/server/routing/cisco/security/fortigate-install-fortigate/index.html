@@ -1,0 +1,832 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.21.0 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>[FortiGate] Install FortiGate dengan GNS3 - My Personal Ngoprek Problems &gt;_</title>
+<meta name="description" content="بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيم">
+
+
+  <meta name="author" content=">_">
+  
+  <meta property="article:author" content=">_">
+  
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="My Personal Ngoprek Problems >_">
+<meta property="og:title" content="[FortiGate] Install FortiGate dengan GNS3">
+<meta property="og:url" content="http://0.0.0.0:4000/ngoprek/server/routing/cisco/security/fortigate-install-fortigate/">
+
+
+  <meta property="og:description" content="بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيم">
+
+
+
+
+
+
+
+  <meta property="article:published_time" content="2019-10-29T00:00:00+07:00">
+
+
+
+
+
+
+<link rel="canonical" href="http://0.0.0.0:4000/ngoprek/server/routing/cisco/security/fortigate-install-fortigate/">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": null,
+      "url": "http://0.0.0.0:4000/"
+    
+  }
+</script>
+
+
+  <meta name="google-site-verification" content="zKB-7_EmphHj7Wpc-lRmu7BjIVPWRvMJkoqWQQBSjEI" />
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+<link href="/feed.xml" type="application/atom+xml" rel="alternate" title="My Personal Ngoprek Problems >_ Feed">
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css">
+
+<!--[if IE]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single">
+    <nav class="skip-links">
+  <h2 class="screen-reader-text">Skip links</h2>
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+        <a class="site-title" href="/">
+          My Personal Ngoprek Problems >_
+          
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/">🎯 Home</a>
+            </li><li class="masthead__menu-item">
+              <a href="/posts/">📝 Blog</a>
+            </li><li class="masthead__menu-item">
+              <a href="/404.html">🏆 Projects</a>
+            </li><li class="masthead__menu-item">
+              <a href="/categories/">📚 Categories</a>
+            </li><li class="masthead__menu-item">
+              <a href="/about/">👨 About</a>
+            </li></ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <svg class="icon" width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15.99 16">
+            <path d="M15.5,13.12L13.19,10.8a1.69,1.69,0,0,0-1.28-.55l-0.06-.06A6.5,6.5,0,0,0,5.77,0,6.5,6.5,0,0,0,2.46,11.59a6.47,6.47,0,0,0,7.74.26l0.05,0.05a1.65,1.65,0,0,0,.5,1.24l2.38,2.38A1.68,1.68,0,0,0,15.5,13.12ZM6.4,2A4.41,4.41,0,1,1,2,6.4,4.43,4.43,0,0,1,6.4,2Z" transform="translate(-.01)"></path>
+          </svg>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person">
+
+  
+    <div class="author__avatar">
+      
+        <img src="/assets/images/bio-photo.jpg" alt=">_" itemprop="image">
+      
+    </div>
+  
+
+  <div class="author__content">
+    
+      <h3 class="author__name" itemprop="name">>_</h3>
+    
+    
+      <div class="author__bio" itemprop="description">
+        <p>“My name is Ammar and this is my personal blog, documenting my journey on the quest to become the best person I can be.”<br /></p>
+
+      </div>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+
+      
+        
+          
+            <li><a href="https://www.ammarun.my.id" rel="nofollow noopener noreferrer"><i class="fas fa-fw fa-link" aria-hidden="true"></i><span class="label">Website</span></a></li>
+          
+        
+          
+            <li><a href="https://twitter.com/ammarun" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i><span class="label">Twitter</span></a></li>
+          
+        
+          
+            <li><a href="https://github.com/ammarun11" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i><span class="label">GitHub</span></a></li>
+          
+        
+          
+            <li><a href="https://instagram.com/nopallll" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-instagram" aria-hidden="true"></i><span class="label">Instagram</span></a></li>
+          
+        
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="[FortiGate] Install FortiGate dengan GNS3">
+    <meta itemprop="description" content="بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيم">
+    <meta itemprop="datePublished" content="2019-10-29T00:00:00+07:00">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title" itemprop="headline">[FortiGate] Install FortiGate dengan GNS3
+</h1>
+          
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          2 minute read
+        
+      </span>
+    
+  </p>
+
+
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        
+        <h1 id="بِسْمِ-اللَّهِ-الرَّحْمَنِ-الرَّحِيم">بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيم</h1>
+<hr />
+
+<h3 id="halo-dalam-lab-kaliini-saya-akan-menunjukkan-kepada-kalian-cara-menambahkan-fortigate-ke-gns3-serta-cara-melakukan-konfigurasi-jaringannya-dan-cara-mengakses-fortigate-melalui-cli-command-line-dan-web-kuy-gaskeun-">Halo, dalam lab kaliini saya akan menunjukkan kepada kalian cara menambahkan Fortigate ke GNS3, serta cara melakukan konfigurasi jaringannya, dan cara mengakses FortiGate melalui CLI (Command-Line) dan web. Kuy Gaskeun ~</h3>
+
+<p><strong>Requirements</strong></p>
+<ul>
+  <li>GNS3 / GNS3VM (Kita pake GNS3)</li>
+  <li>Download FortiGate appliance from <a href="https://docs.gns3.com/appliances/fortigate.html">Here!</a></li>
+  <li>Download FortiGate 6.0.0 Image from <a href="https://help.fortinet.com/fos50hlp/56/Content/FortiOS/fortigate-virtual-fortios/VM%20Platforms/download-vm-deploy-pkg.htm">Here!</a></li>
+</ul>
+
+<hr />
+
+<h2 id="selanjut-nya-kita-import-appliance-dan-image-fortigate-ke-gns3">Selanjut nya kita Import appliance dan image FortiGate ke GNS3.</h2>
+
+<p><strong>Start a new blank project, click File &gt; Import Appliance, lalu pilih FortiGate appliance file (.gns3a).</strong></p>
+
+<p><img src="https://raw.githubusercontent.com/ammarun11/ammarun11.github.io/master/static/img/_posts/fortigate-import.png" alt="fortigate-applience" /></p>
+
+<p><strong>Disini saya menginstall nya di gns3 local, jadi resource yang di gunakan langsung menggunakan perangkat laptop.</strong></p>
+
+<p><img src="https://raw.githubusercontent.com/ammarun11/ammarun11.github.io/master/static/img/_posts/fortigate-local.png" alt="fortigate-local" /></p>
+
+<p><strong>Lalu Next, Click Refresh, lalu ada beberapa list version semua seri FortiGate kita disini memakai v6.0.0,</strong></p>
+
+<p><strong><code class="language-plaintext highlighter-rouge">FortiGate 6.0.0 </code>on the list, click on FGT_VM64_KVM-v6….., Lalu Import image ForiGate kita lalu Click dan Next!</strong></p>
+
+<p><img src="https://raw.githubusercontent.com/ammarun11/ammarun11.github.io/master/static/img/_posts/fortigate-fortigateqcow2.png" alt="fortigate-fortigateqcow2" /></p>
+
+<p><strong>setelah menambahkan 2 file ya itu appliance dan image maka <code class="language-plaintext highlighter-rouge">ready to install</code>, click on Next, then choose /usr/bin/qemu-system-x86_64 (v2.5.0) for Qemu binary, then click Next, Next, Finish.</strong></p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">Fortigate Ready</code></li>
+</ul>
+
+<p><img src="https://raw.githubusercontent.com/ammarun11/ammarun11.github.io/master/static/img/_posts/fortigate-ready.png" alt="fortigate-ready" /></p>
+
+<hr />
+
+<h1 id="network-topology--configuration"><strong>Network Topology &amp; Configuration</strong></h1>
+
+<p><strong>Untuk lab ini saya menggunakan Topology Sederhana</strong></p>
+<ul>
+  <li>INTERNET <code class="language-plaintext highlighter-rouge">10.10.10.1/24</code></li>
+  <li>Loopback (Untuk bisa di akses secara lokal di Laptop) <code class="language-plaintext highlighter-rouge">192.168.10.1/24</code></li>
+  <li>Fortigate 1 <code class="language-plaintext highlighter-rouge">192.168.10.2/24</code></li>
+  <li>Switch 1</li>
+  <li>Client/VPCS 1 <code class="language-plaintext highlighter-rouge">172.168.10.2/24</code></li>
+</ul>
+
+<p>untuk yang menggunakan Linux ubuntu bisa membuat ethernet virtual dengan TUN/TAP
+ <a href="http://www.sibro21.org/2016/08/menghubungkan-gns3-ke-internet-di.html">Sumber!</a></p>
+
+<p><strong>Selanjutnya kita Start Jika ada Indicator Eror Seperti Di Linux Ubuntu Maka lakukan perintah seperti ini</strong></p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo chown </span>root:namausernamemu /dev/kvm
+</code></pre></div></div>
+<p><img src="https://raw.githubusercontent.com/ammarun11/ammarun11.github.io/master/static/img/_posts/fortigate-qemu-eror.png" alt="fortigate-qemu-eror" /></p>
+
+<p><img src="https://raw.githubusercontent.com/ammarun11/ammarun11.github.io/master/static/img/_posts/fortigate-ngoprek.png" alt="fortigate-ngoprek" /></p>
+
+<h2 id="fortigate-configuration"><code class="language-plaintext highlighter-rouge">FortiGate Configuration</code></h2>
+
+<p>Right-Click on FortiGate, lalu click on Console to access the CLI. Masukan username is ‘admin’ dan blank password.</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Trying 127.0.0.1...
+Connected to 127.0.0.1.
+Escape character is.
+
+System is starting...
+Starting system maintenance...
+Scanning /dev/vda1... <span class="o">(</span>100%<span class="o">)</span>  
+Scanning /dev/vda2... <span class="o">(</span>100%<span class="o">)</span>   
+Serial number is FGVMEVGDUEEQXH72
+
+
+FortiGate-VM64-KVM login: admin
+Password: 
+Welcome <span class="o">!</span>
+
+WARNING: File System Check Recommended! Unsafe reboot may have caused inconsistency <span class="k">in </span>disk drive.
+It is strongly recommended that you check file system consistency before proceeding.
+Please run <span class="s1">'execute disk scan 17'</span>
+Note: The device will reboot and scan during startup. This may take up to an hour
+FortiGate-VM64-KVM <span class="c">#</span>
+</code></pre></div></div>
+
+<p><strong>lalu kita set port3 untuk ethernet yang terhubung langsung ke <code class="language-plaintext highlighter-rouge">loopback</code>.</strong></p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>config system interface
+edit port1
+<span class="nb">set </span>ip your-private-ip/your-subnet-mask
+<span class="nb">set </span>allowaccess ping http https ssh
+end
+
+show system interface <span class="o">(</span>To verify the configuration<span class="o">)</span>
+</code></pre></div></div>
+<blockquote>
+  <p>My shell</p>
+  <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>FortiGate-VM64-KVM <span class="c"># config system interface </span>
+FortiGate-VM64-KVM <span class="o">(</span>interface<span class="o">)</span> <span class="c"># edit port3</span>
+FortiGate-VM64-KVM <span class="o">(</span>port3<span class="o">)</span> <span class="c"># </span>
+FortiGate-VM64-KVM <span class="o">(</span>port3<span class="o">)</span> <span class="c"># set ip 192.168.10.2 255.255.255.0</span>
+FortiGate-VM64-KVM <span class="o">(</span>port3<span class="o">)</span> <span class="c"># set allowaccess ping https http ssh </span>
+FortiGate-VM64-KVM <span class="o">(</span>port3<span class="o">)</span> <span class="c"># end</span>
+</code></pre></div>  </div>
+</blockquote>
+
+<p><strong>Selanjutnya kita buka browser untuk mengakses GUI dari fortigate melalui web</strong></p>
+
+<blockquote>
+  <p>Masukan username is ‘admin’ dan blank password.</p>
+</blockquote>
+
+<p><img src="https://raw.githubusercontent.com/ammarun11/ammarun11.github.io/master/static/img/_posts/fortigate-login.png" alt="fortigate-ngoprek" /></p>
+
+<p><strong>DONE Ini tampilan GUI FortiGate</strong></p>
+
+<p><img src="https://raw.githubusercontent.com/ammarun11/ammarun11.github.io/master/static/img/_posts/fortigate-dashboard.png" alt="fortigate-dashboard" /></p>
+
+<hr />
+<p><strong>KESIMPULAN</strong>
+Kita telah mengkonfigurasi FortiGate dengan menggunakan media GNS3 Lab selanjutnya kita akan membahas lebih dalam penggunaan <code class="language-plaintext highlighter-rouge">Firewall</code> FortiGate ini seperti bagaimana dia mem block port dan mengatasi masalah security pada suatu jaringan.</p>
+
+<p><strong>Referensi</strong></p>
+<ul>
+  <li><a href="https://docs.gns3.com/appliances/fortigate.html">https://docs.gns3.com/appliances/fortigate.html</a></li>
+  <li><a href="https://help.fortinet.com/fos50hlp/52data/Content/FortiOS/fortigate-system-administration-52/The%20CLI/using_cli.htm">https://help.fortinet.com/fos50hlp/52data/Content/FortiOS/fortigate-system-administration-52/The%20CLI/using_cli.htm</a></li>
+  <li><a href="https://www.linkedin.com/pulse/fortigate-inside-gns3-cli-web-access-issa-itani/">https://www.linkedin.com/pulse/fortigate-inside-gns3-cli-web-access-issa-itani/</a></li>
+</ul>
+
+<h1 id="happy--enjoy-ngoprek">Happy,  Enjoy ngoprek~</h1>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+
+
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/categories/#cisco" class="page__taxonomy-item" rel="tag">cisco</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/categories/#ngoprek" class="page__taxonomy-item" rel="tag">ngoprek</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/categories/#routing" class="page__taxonomy-item" rel="tag">routing</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/categories/#security" class="page__taxonomy-item" rel="tag">security</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/categories/#server" class="page__taxonomy-item" rel="tag">server</a>
+    
+    </span>
+  </p>
+
+
+        
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2019-10-29T00:00:00+07:00">October 29, 2019</time></p>
+
+
+      </footer>
+
+      <section class="page__share">
+  
+
+  <a href="https://twitter.com/intent/tweet?text=%5BFortiGate%5D+Install+FortiGate+dengan+GNS3%20http%3A%2F%2F0.0.0.0%3A4000%2Fngoprek%2Fserver%2Frouting%2Fcisco%2Fsecurity%2Ffortigate-install-fortigate%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2F0.0.0.0%3A4000%2Fngoprek%2Fserver%2Frouting%2Fcisco%2Fsecurity%2Ffortigate-install-fortigate%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2F0.0.0.0%3A4000%2Fngoprek%2Fserver%2Frouting%2Fcisco%2Fsecurity%2Ffortigate-install-fortigate%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="/ngoprek/server/cloud/docker/container/orchestration/kubernetes-lab7-quiz1/" class="pagination--pager" title="[Kubernetes] Latihan Deploy Nginx app Lab k8s (Part 6)
+">Previous</a>
+    
+    
+      <a href="/ngoprek/automation/routing/cisco/network-automation-telnetlib/" class="pagination--pager" title="[Cisco] Konfigurasi Router Cisco dengan telnetlib python
+">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h4 class="page__related-title">You May Also Enjoy</h4>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/500x300.jpg" alt="">
+      </div>
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/ngoprek/server/cloud/security/Integrate-CEPH-in-Kolla-OPENSTACK/" rel="permalink">[Openstack] Integrate CEPH in Kolla OPENSTACK
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          3 minute read
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيم
+Integrate CEPH in Kolla OPENSTACK
+
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/500x300.jpg" alt="">
+      </div>
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/ngoprek/server/cloud/security/Honeypot-kippo/" rel="permalink">[Security] Deployment Kippo Honeypot On Linux Ubuntu
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          4 minute read
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيم
+Deployment Kippo Honeypot On Linux Ubuntu
+
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/500x300.jpg" alt="">
+      </div>
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/ngoprek/server/cloud/kubernetes/container/kubernetes-part9/" rel="permalink">[Kubernetes The Hard Way] Deploying the DNS Cluster Add-on - FinalPart 9
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          1 minute read
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيم
+Deploying the DNS Cluster Add-on (Kubernetes The Hardway)
+
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/500x300.jpg" alt="">
+      </div>
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/ngoprek/server/cloud/kubernetes/container/kubernetes-part8/" rel="permalink">[Kubernetes The Hard Way] POD Network Routes - Part 8
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          2 minute read
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيم
+POD Network Routes (Kubernetes The Hardway)
+
+</p>
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+</div>
+
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap"><form class="search-content__form" onkeydown="return event.key != 'Enter';">
+    <label class="sr-only" for="search">
+      Enter your search term...
+    </label>
+    <input type="search" id="search" class="search-input" tabindex="-1" placeholder="Enter your search term..." />
+  </form>
+  <div id="results" class="results"></div></div>
+
+      </div>
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+
+    
+      
+        
+          <li><a href="https://twitter.com/ammarun" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter</a></li>
+        
+      
+        
+          <li><a href="https://github.com/ammarun11" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+        
+      
+        
+          <li><a href="https://instagram.com/ammarun" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-instagram" aria-hidden="true"></i> Instagram</a></li>
+        
+      
+    
+
+    <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2021 My Personal Ngoprek Problems >_. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+  <script src="https://kit.fontawesome.com/4eee35f757.js"></script>
+
+
+
+
+<script src="/assets/js/lunr/lunr.min.js"></script>
+<script src="/assets/js/lunr/lunr-store.js"></script>
+<script src="/assets/js/lunr/lunr-en.js"></script>
+
+
+
+
+    
+  <script>
+    var disqus_config = function () {
+      this.page.url = "http://0.0.0.0:4000/ngoprek/server/routing/cisco/security/fortigate-install-fortigate/";  /* Replace PAGE_URL with your page's canonical URL variable */
+      this.page.identifier = "/ngoprek/server/routing/cisco/security/fortigate-install-fortigate"; /* Replace PAGE_IDENTIFIER with your page's unique identifier variable */
+    };
+    (function() { /* DON'T EDIT BELOW THIS LINE */
+      var d = document, s = d.createElement('script');
+      s.src = 'https://masalahngoprek.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+    })();
+  </script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+  
+
+
+
+
+<script type="text/javascript" async
+	src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML">
+</script>
+
+<script type="text/x-mathjax-config">
+   MathJax.Hub.Config({
+     extensions: ["tex2jax.js"],
+     jax: ["input/TeX", "output/HTML-CSS"],
+     tex2jax: {
+       inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+       displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+       processEscapes: true
+     },
+     "HTML-CSS": { availableFonts: ["TeX"] }
+   });
+</script>
+
+
+  </body>
+</html>

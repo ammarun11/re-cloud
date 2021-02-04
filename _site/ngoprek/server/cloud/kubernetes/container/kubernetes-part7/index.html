@@ -1,0 +1,1013 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.21.0 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>[Kubernetes The Hard Way] Bootstrapping the Kubernetes Worker Nodes - Part 7 - My Personal Ngoprek Problems &gt;_</title>
+<meta name="description" content="بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيم Bootstrapping the Kubernetes Worker Nodes (Kubernetes The Hardway)">
+
+
+  <meta name="author" content=">_">
+  
+  <meta property="article:author" content=">_">
+  
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="My Personal Ngoprek Problems >_">
+<meta property="og:title" content="[Kubernetes The Hard Way] Bootstrapping the Kubernetes Worker Nodes - Part 7">
+<meta property="og:url" content="http://0.0.0.0:4000/ngoprek/server/cloud/kubernetes/container/kubernetes-part7/">
+
+
+  <meta property="og:description" content="بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيم Bootstrapping the Kubernetes Worker Nodes (Kubernetes The Hardway)">
+
+
+
+
+
+
+
+  <meta property="article:published_time" content="2020-04-14T00:00:00+07:00">
+
+
+
+
+
+
+<link rel="canonical" href="http://0.0.0.0:4000/ngoprek/server/cloud/kubernetes/container/kubernetes-part7/">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": null,
+      "url": "http://0.0.0.0:4000/"
+    
+  }
+</script>
+
+
+  <meta name="google-site-verification" content="zKB-7_EmphHj7Wpc-lRmu7BjIVPWRvMJkoqWQQBSjEI" />
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+<link href="/feed.xml" type="application/atom+xml" rel="alternate" title="My Personal Ngoprek Problems >_ Feed">
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css">
+
+<!--[if IE]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single">
+    <nav class="skip-links">
+  <h2 class="screen-reader-text">Skip links</h2>
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+        <a class="site-title" href="/">
+          My Personal Ngoprek Problems >_
+          
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/">🎯 Home</a>
+            </li><li class="masthead__menu-item">
+              <a href="/posts/">📝 Blog</a>
+            </li><li class="masthead__menu-item">
+              <a href="/404.html">🏆 Projects</a>
+            </li><li class="masthead__menu-item">
+              <a href="/categories/">📚 Categories</a>
+            </li><li class="masthead__menu-item">
+              <a href="/about/">👨 About</a>
+            </li></ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <svg class="icon" width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15.99 16">
+            <path d="M15.5,13.12L13.19,10.8a1.69,1.69,0,0,0-1.28-.55l-0.06-.06A6.5,6.5,0,0,0,5.77,0,6.5,6.5,0,0,0,2.46,11.59a6.47,6.47,0,0,0,7.74.26l0.05,0.05a1.65,1.65,0,0,0,.5,1.24l2.38,2.38A1.68,1.68,0,0,0,15.5,13.12ZM6.4,2A4.41,4.41,0,1,1,2,6.4,4.43,4.43,0,0,1,6.4,2Z" transform="translate(-.01)"></path>
+          </svg>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person">
+
+  
+    <div class="author__avatar">
+      
+        <img src="/assets/images/bio-photo.jpg" alt=">_" itemprop="image">
+      
+    </div>
+  
+
+  <div class="author__content">
+    
+      <h3 class="author__name" itemprop="name">>_</h3>
+    
+    
+      <div class="author__bio" itemprop="description">
+        <p>“My name is Ammar and this is my personal blog, documenting my journey on the quest to become the best person I can be.”<br /></p>
+
+      </div>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+
+      
+        
+          
+            <li><a href="https://www.ammarun.my.id" rel="nofollow noopener noreferrer"><i class="fas fa-fw fa-link" aria-hidden="true"></i><span class="label">Website</span></a></li>
+          
+        
+          
+            <li><a href="https://twitter.com/ammarun" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i><span class="label">Twitter</span></a></li>
+          
+        
+          
+            <li><a href="https://github.com/ammarun11" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i><span class="label">GitHub</span></a></li>
+          
+        
+          
+            <li><a href="https://instagram.com/nopallll" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-instagram" aria-hidden="true"></i><span class="label">Instagram</span></a></li>
+          
+        
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="[Kubernetes The Hard Way] Bootstrapping the Kubernetes Worker Nodes - Part 7">
+    <meta itemprop="description" content="بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمBootstrapping the Kubernetes Worker Nodes (Kubernetes The Hardway)">
+    <meta itemprop="datePublished" content="2020-04-14T00:00:00+07:00">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title" itemprop="headline">[Kubernetes The Hard Way] Bootstrapping the Kubernetes Worker Nodes - Part 7
+</h1>
+          
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          3 minute read
+        
+      </span>
+    
+  </p>
+
+
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        
+        <h1 id="بِسْمِ-اللَّهِ-الرَّحْمَنِ-الرَّحِيم">بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيم</h1>
+<h2 id="bootstrapping-the-kubernetes-worker-nodes-kubernetes-the-hardway">Bootstrapping the Kubernetes Worker Nodes (Kubernetes The Hardway)</h2>
+
+<p>Lanjutkeunn, Lab part 7
+In this lab you will bootstrap three Kubernetes worker nodes. The following components will be installed on each node: <a href="https://github.com/opencontainers/runc">runc</a>, <a href="https://github.com/google/gvisor">gVisor</a>, <a href="https://github.com/containernetworking/cni">container networking plugins</a>, <a href="https://github.com/containerd/containerd">containerd</a>, <a href="https://kubernetes.io/docs/admin/kubelet">kubelet</a>, and <a href="https://kubernetes.io/docs/concepts/cluster-administration/proxies">kube-proxy</a>.</p>
+
+<h2 id="prerequisites">Prerequisites</h2>
+<p>The commands in this lab must be run on each controller instance: worker-0, worker-1, and worker-2</p>
+
+<h2 id="running-commands-in-parallel-with-tmux">Running commands in parallel with tmux</h2>
+<p>tmux can be used to run commands on multiple compute instances at the same time. See the Running commands in <a href="https://blog.amjith.com/synchronize-panes-in-tmux">parallel with tmux</a> section in the Prerequisites lab.</p>
+
+<h2 id="provisioning-a-kubernetes-worker-node">Provisioning a Kubernetes Worker Node</h2>
+<p>Install the OS dependencies:</p>
+<div class="language-s highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="n">sudo</span><span class="w"> </span><span class="n">apt</span><span class="o">-</span><span class="n">get</span><span class="w"> </span><span class="n">update</span><span class="w">
+  </span><span class="n">sudo</span><span class="w"> </span><span class="n">apt</span><span class="o">-</span><span class="n">get</span><span class="w"> </span><span class="o">-</span><span class="n">y</span><span class="w"> </span><span class="n">install</span><span class="w"> </span><span class="n">socat</span><span class="w"> </span><span class="n">conntrack</span><span class="w"> </span><span class="n">ipset</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+<blockquote>
+  <p>The socat binary enables support for the <code class="language-plaintext highlighter-rouge">kubectl port-forward</code> command.</p>
+</blockquote>
+
+<h3 id="download-and-install-worker-binaries">Download and Install Worker Binaries</h3>
+<div class="language-s highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">wget</span><span class="w"> </span><span class="o">-</span><span class="n">q</span><span class="w"> </span><span class="o">--</span><span class="n">show</span><span class="o">-</span><span class="n">progress</span><span class="w"> </span><span class="o">--</span><span class="n">https</span><span class="o">-</span><span class="n">only</span><span class="w"> </span><span class="o">--</span><span class="n">timestamping</span><span class="w"> </span><span class="err">\</span><span class="w">
+  </span><span class="n">https</span><span class="o">://</span><span class="n">github.com</span><span class="o">/</span><span class="n">kubernetes</span><span class="o">-</span><span class="n">sigs</span><span class="o">/</span><span class="n">cri</span><span class="o">-</span><span class="n">tools</span><span class="o">/</span><span class="n">releases</span><span class="o">/</span><span class="n">download</span><span class="o">/</span><span class="n">v1.12.0</span><span class="o">/</span><span class="n">crictl</span><span class="o">-</span><span class="n">v1.12.0</span><span class="o">-</span><span class="n">linux</span><span class="o">-</span><span class="n">amd64.tar.gz</span><span class="w"> </span><span class="err">\</span><span class="w">
+  </span><span class="n">https</span><span class="o">://</span><span class="n">storage.googleapis.com</span><span class="o">/</span><span class="n">kubernetes</span><span class="o">-</span><span class="n">the</span><span class="o">-</span><span class="n">hard</span><span class="o">-</span><span class="n">way</span><span class="o">/</span><span class="n">runsc</span><span class="m">-50</span><span class="n">c283b9f56bb7200938d9e207355f05f79f0d17</span><span class="w"> </span><span class="err">\</span><span class="w">
+  </span><span class="n">https</span><span class="o">://</span><span class="n">github.com</span><span class="o">/</span><span class="n">opencontainers</span><span class="o">/</span><span class="n">runc</span><span class="o">/</span><span class="n">releases</span><span class="o">/</span><span class="n">download</span><span class="o">/</span><span class="n">v1.0.0</span><span class="o">-</span><span class="n">rc5</span><span class="o">/</span><span class="n">runc.amd64</span><span class="w"> </span><span class="err">\</span><span class="w">
+  </span><span class="n">https</span><span class="o">://</span><span class="n">github.com</span><span class="o">/</span><span class="n">containernetworking</span><span class="o">/</span><span class="n">plugins</span><span class="o">/</span><span class="n">releases</span><span class="o">/</span><span class="n">download</span><span class="o">/</span><span class="n">v0.6.0</span><span class="o">/</span><span class="n">cni</span><span class="o">-</span><span class="n">plugins</span><span class="o">-</span><span class="n">amd64</span><span class="o">-</span><span class="n">v0.6.0.tgz</span><span class="w"> </span><span class="err">\</span><span class="w">
+  </span><span class="n">https</span><span class="o">://</span><span class="n">github.com</span><span class="o">/</span><span class="n">containerd</span><span class="o">/</span><span class="n">containerd</span><span class="o">/</span><span class="n">releases</span><span class="o">/</span><span class="n">download</span><span class="o">/</span><span class="n">v1.2.0</span><span class="o">-</span><span class="n">rc.0</span><span class="o">/</span><span class="n">containerd</span><span class="m">-1.2.0</span><span class="o">-</span><span class="n">rc.0.linux</span><span class="o">-</span><span class="n">amd64.tar.gz</span><span class="w"> </span><span class="err">\</span><span class="w">
+  </span><span class="n">https</span><span class="o">://</span><span class="n">storage.googleapis.com</span><span class="o">/</span><span class="n">kubernetes</span><span class="o">-</span><span class="n">release</span><span class="o">/</span><span class="n">release</span><span class="o">/</span><span class="n">v1.12.0</span><span class="o">/</span><span class="n">bin</span><span class="o">/</span><span class="n">linux</span><span class="o">/</span><span class="n">amd64</span><span class="o">/</span><span class="n">kubectl</span><span class="w"> </span><span class="err">\</span><span class="w">
+  </span><span class="n">https</span><span class="o">://</span><span class="n">storage.googleapis.com</span><span class="o">/</span><span class="n">kubernetes</span><span class="o">-</span><span class="n">release</span><span class="o">/</span><span class="n">release</span><span class="o">/</span><span class="n">v1.12.0</span><span class="o">/</span><span class="n">bin</span><span class="o">/</span><span class="n">linux</span><span class="o">/</span><span class="n">amd64</span><span class="o">/</span><span class="n">kube</span><span class="o">-</span><span class="n">proxy</span><span class="w"> </span><span class="err">\</span><span class="w">
+  </span><span class="n">https</span><span class="o">://</span><span class="n">storage.googleapis.com</span><span class="o">/</span><span class="n">kubernetes</span><span class="o">-</span><span class="n">release</span><span class="o">/</span><span class="n">release</span><span class="o">/</span><span class="n">v1.12.0</span><span class="o">/</span><span class="n">bin</span><span class="o">/</span><span class="n">linux</span><span class="o">/</span><span class="n">amd64</span><span class="o">/</span><span class="n">kubelet</span><span class="w">
+</span><span class="n">Create</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">installation</span><span class="w"> </span><span class="n">directories</span><span class="o">:</span><span class="w">
+</span></code></pre></div></div>
+
+<p>Create the installation directories:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo mkdir -p \
+  /etc/cni/net.d \
+  /opt/cni/bin \
+  /var/lib/kubelet \
+  /var/lib/kube-proxy \
+  /var/lib/kubernetes \
+  /var/run/kubernetes
+</code></pre></div></div>
+<p>Install the worker binaries:</p>
+
+<div class="language-s highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="n">sudo</span><span class="w"> </span><span class="n">mv</span><span class="w"> </span><span class="n">runsc</span><span class="m">-50</span><span class="n">c283b9f56bb7200938d9e207355f05f79f0d17</span><span class="w"> </span><span class="n">runsc</span><span class="w">
+  </span><span class="n">sudo</span><span class="w"> </span><span class="n">mv</span><span class="w"> </span><span class="n">runc.amd64</span><span class="w"> </span><span class="n">runc</span><span class="w">
+  </span><span class="n">chmod</span><span class="w"> </span><span class="o">+</span><span class="n">x</span><span class="w"> </span><span class="n">kubectl</span><span class="w"> </span><span class="n">kube</span><span class="o">-</span><span class="n">proxy</span><span class="w"> </span><span class="n">kubelet</span><span class="w"> </span><span class="n">runc</span><span class="w"> </span><span class="n">runsc</span><span class="w">
+  </span><span class="n">sudo</span><span class="w"> </span><span class="n">mv</span><span class="w"> </span><span class="n">kubectl</span><span class="w"> </span><span class="n">kube</span><span class="o">-</span><span class="n">proxy</span><span class="w"> </span><span class="n">kubelet</span><span class="w"> </span><span class="n">runc</span><span class="w"> </span><span class="n">runsc</span><span class="w"> </span><span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">local</span><span class="o">/</span><span class="n">bin</span><span class="o">/</span><span class="w">
+  </span><span class="n">sudo</span><span class="w"> </span><span class="n">tar</span><span class="w"> </span><span class="o">-</span><span class="n">xvf</span><span class="w"> </span><span class="n">crictl</span><span class="o">-</span><span class="n">v1.12.0</span><span class="o">-</span><span class="n">linux</span><span class="o">-</span><span class="n">amd64.tar.gz</span><span class="w"> </span><span class="o">-</span><span class="n">C</span><span class="w"> </span><span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">local</span><span class="o">/</span><span class="n">bin</span><span class="o">/</span><span class="w">
+  </span><span class="n">sudo</span><span class="w"> </span><span class="n">tar</span><span class="w"> </span><span class="o">-</span><span class="n">xvf</span><span class="w"> </span><span class="n">cni</span><span class="o">-</span><span class="n">plugins</span><span class="o">-</span><span class="n">amd64</span><span class="o">-</span><span class="n">v0.6.0.tgz</span><span class="w"> </span><span class="o">-</span><span class="n">C</span><span class="w"> </span><span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">cni</span><span class="o">/</span><span class="n">bin</span><span class="o">/</span><span class="w">
+  </span><span class="n">sudo</span><span class="w"> </span><span class="n">tar</span><span class="w"> </span><span class="o">-</span><span class="n">xvf</span><span class="w"> </span><span class="n">containerd</span><span class="m">-1.2.0</span><span class="o">-</span><span class="n">rc.0.linux</span><span class="o">-</span><span class="n">amd64.tar.gz</span><span class="w"> </span><span class="o">-</span><span class="n">C</span><span class="w"> </span><span class="o">/</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+<h3 id="configure-cni-networking">Configure CNI Networking</h3>
+<p>Retrieve the Pod CIDR range for the current compute instance:</p>
+
+<p>Worker-0</p>
+<div class="language-s highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">POD_CIDR</span><span class="o">=</span><span class="m">10.200.0.0</span><span class="o">/</span><span class="m">24</span><span class="w">
+</span></code></pre></div></div>
+<p>Worker-1</p>
+<div class="language-s highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">POD_CIDR</span><span class="o">=</span><span class="m">10.200.1.0</span><span class="o">/</span><span class="m">24</span><span class="w">
+</span></code></pre></div></div>
+<p>Worker-2</p>
+<div class="language-s highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">POD_CIDR</span><span class="o">=</span><span class="m">10.200.2.0</span><span class="o">/</span><span class="m">24</span><span class="w">
+</span></code></pre></div></div>
+
+<p>Create the <code class="language-plaintext highlighter-rouge">bridge</code> network configuration file:</p>
+<div class="language-s highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">cat</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="n">EOF</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">sudo</span><span class="w"> </span><span class="n">tee</span><span class="w"> </span><span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">cni</span><span class="o">/</span><span class="n">net.d</span><span class="o">/</span><span class="m">10</span><span class="o">-</span><span class="n">bridge.conf</span><span class="w">
+</span><span class="p">{</span><span class="w">
+    </span><span class="s2">"cniVersion"</span><span class="o">:</span><span class="w"> </span><span class="s2">"0.3.1"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"name"</span><span class="o">:</span><span class="w"> </span><span class="s2">"bridge"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"type"</span><span class="o">:</span><span class="w"> </span><span class="s2">"bridge"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"bridge"</span><span class="o">:</span><span class="w"> </span><span class="s2">"cnio0"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"isGateway"</span><span class="o">:</span><span class="w"> </span><span class="n">true</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"ipMasq"</span><span class="o">:</span><span class="w"> </span><span class="n">true</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"ipam"</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"type"</span><span class="o">:</span><span class="w"> </span><span class="s2">"host-local"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"ranges"</span><span class="o">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+          </span><span class="p">[{</span><span class="s2">"subnet"</span><span class="o">:</span><span class="w"> </span><span class="s2">"${POD_CIDR}"</span><span class="p">}]</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+        </span><span class="s2">"routes"</span><span class="o">:</span><span class="w"> </span><span class="p">[{</span><span class="s2">"dst"</span><span class="o">:</span><span class="w"> </span><span class="s2">"0.0.0.0/0"</span><span class="p">}]</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span><span class="n">EOF</span><span class="w">
+</span></code></pre></div></div>
+<p>Create the <code class="language-plaintext highlighter-rouge">loopback</code> network configuration file:</p>
+<div class="language-s highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">cat</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="n">EOF</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">sudo</span><span class="w"> </span><span class="n">tee</span><span class="w"> </span><span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">cni</span><span class="o">/</span><span class="n">net.d</span><span class="o">/</span><span class="m">99</span><span class="o">-</span><span class="n">loopback.conf</span><span class="w">
+</span><span class="p">{</span><span class="w">
+    </span><span class="s2">"cniVersion"</span><span class="o">:</span><span class="w"> </span><span class="s2">"0.3.1"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"type"</span><span class="o">:</span><span class="w"> </span><span class="s2">"loopback"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span><span class="n">EOF</span><span class="w">
+</span></code></pre></div></div>
+
+<h3 id="configure-containerd">Configure containerd</h3>
+<p>Create the <code class="language-plaintext highlighter-rouge">containerd</code> configuration file:</p>
+<div class="language-s highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">sudo</span><span class="w"> </span><span class="n">mkdir</span><span class="w"> </span><span class="o">-</span><span class="n">p</span><span class="w"> </span><span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">containerd</span><span class="o">/</span><span class="w">
+</span></code></pre></div></div>
+<div class="language-s highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">cat</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">EOF</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">sudo</span><span class="w"> </span><span class="n">tee</span><span class="w"> </span><span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">containerd</span><span class="o">/</span><span class="n">config.toml</span><span class="w">
+</span><span class="p">[</span><span class="n">plugins</span><span class="p">]</span><span class="w">
+  </span><span class="p">[</span><span class="n">plugins.cri.containerd</span><span class="p">]</span><span class="w">
+    </span><span class="n">snapshotter</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"overlayfs"</span><span class="w">
+    </span><span class="p">[</span><span class="n">plugins.cri.containerd.default_runtime</span><span class="p">]</span><span class="w">
+      </span><span class="n">runtime_type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"io.containerd.runtime.v1.linux"</span><span class="w">
+      </span><span class="n">runtime_engine</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"/usr/local/bin/runc"</span><span class="w">
+      </span><span class="n">runtime_root</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">""</span><span class="w">
+    </span><span class="p">[</span><span class="n">plugins.cri.containerd.untrusted_workload_runtime</span><span class="p">]</span><span class="w">
+      </span><span class="n">runtime_type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"io.containerd.runtime.v1.linux"</span><span class="w">
+      </span><span class="n">runtime_engine</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"/usr/local/bin/runsc"</span><span class="w">
+      </span><span class="n">runtime_root</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"/run/containerd/runsc"</span><span class="w">
+    </span><span class="p">[</span><span class="n">plugins.cri.containerd.gvisor</span><span class="p">]</span><span class="w">
+      </span><span class="n">runtime_type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"io.containerd.runtime.v1.linux"</span><span class="w">
+      </span><span class="n">runtime_engine</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"/usr/local/bin/runsc"</span><span class="w">
+      </span><span class="n">runtime_root</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"/run/containerd/runsc"</span><span class="w">
+</span><span class="n">EOF</span><span class="w">
+</span></code></pre></div></div>
+<blockquote>
+  <p>Untrusted workloads will be run using the gVisor (runsc) runtime.</p>
+</blockquote>
+
+<p>Create the <code class="language-plaintext highlighter-rouge">containerd.service</code> systemd unit file:</p>
+<div class="language-s highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">cat</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="n">EOF</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">sudo</span><span class="w"> </span><span class="n">tee</span><span class="w"> </span><span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">systemd</span><span class="o">/</span><span class="n">system</span><span class="o">/</span><span class="n">containerd.service</span><span class="w">
+</span><span class="p">[</span><span class="n">Unit</span><span class="p">]</span><span class="w">
+</span><span class="n">Description</span><span class="o">=</span><span class="n">containerd</span><span class="w"> </span><span class="n">container</span><span class="w"> </span><span class="n">runtime</span><span class="w">
+</span><span class="n">Documentation</span><span class="o">=</span><span class="n">https</span><span class="o">://</span><span class="n">containerd.io</span><span class="w">
+</span><span class="n">After</span><span class="o">=</span><span class="n">network.target</span><span class="w">
+
+</span><span class="p">[</span><span class="n">Service</span><span class="p">]</span><span class="w">
+</span><span class="n">ExecStart</span><span class="o">=/</span><span class="n">bin</span><span class="o">/</span><span class="n">containerd</span><span class="w">
+</span><span class="n">Restart</span><span class="o">=</span><span class="n">always</span><span class="w">
+</span><span class="n">RestartSec</span><span class="o">=</span><span class="m">5</span><span class="w">
+</span><span class="n">Delegate</span><span class="o">=</span><span class="n">yes</span><span class="w">
+</span><span class="n">KillMode</span><span class="o">=</span><span class="n">process</span><span class="w">
+</span><span class="n">OOMScoreAdjust</span><span class="o">=</span><span class="m">-999</span><span class="w">
+</span><span class="n">LimitNOFILE</span><span class="o">=</span><span class="m">1048576</span><span class="w">
+</span><span class="n">LimitNPROC</span><span class="o">=</span><span class="n">infinity</span><span class="w">
+</span><span class="n">LimitCORE</span><span class="o">=</span><span class="n">infinity</span><span class="w">
+
+</span><span class="p">[</span><span class="n">Install</span><span class="p">]</span><span class="w">
+</span><span class="n">WantedBy</span><span class="o">=</span><span class="n">multi</span><span class="o">-</span><span class="n">user.target</span><span class="w">
+</span><span class="n">EOF</span><span class="w">
+</span></code></pre></div></div>
+
+<h3 id="configure-the-kubelet">Configure the Kubelet</h3>
+<div class="language-s highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="n">sudo</span><span class="w"> </span><span class="n">mv</span><span class="w"> </span><span class="o">$</span><span class="p">{</span><span class="n">HOSTNAME</span><span class="p">}</span><span class="o">-</span><span class="n">key.pem</span><span class="w"> </span><span class="o">$</span><span class="p">{</span><span class="n">HOSTNAME</span><span class="p">}</span><span class="n">.pem</span><span class="w"> </span><span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">kubelet</span><span class="o">/</span><span class="w">
+  </span><span class="n">sudo</span><span class="w"> </span><span class="n">mv</span><span class="w"> </span><span class="o">$</span><span class="p">{</span><span class="n">HOSTNAME</span><span class="p">}</span><span class="n">.kubeconfig</span><span class="w"> </span><span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">kubelet</span><span class="o">/</span><span class="n">kubeconfig</span><span class="w">
+  </span><span class="n">sudo</span><span class="w"> </span><span class="n">mv</span><span class="w"> </span><span class="n">ca.pem</span><span class="w"> </span><span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">kubernetes</span><span class="o">/</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+<p>Create the <code class="language-plaintext highlighter-rouge">kubelet-config.yaml</code> configuration file:</p>
+<div class="language-s highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">cat</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="n">EOF</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">sudo</span><span class="w"> </span><span class="n">tee</span><span class="w"> </span><span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">kubelet</span><span class="o">/</span><span class="n">kubelet</span><span class="o">-</span><span class="n">config.yaml</span><span class="w">
+</span><span class="n">kind</span><span class="o">:</span><span class="w"> </span><span class="n">KubeletConfiguration</span><span class="w">
+</span><span class="n">apiVersion</span><span class="o">:</span><span class="w"> </span><span class="n">kubelet.config.k8s.io</span><span class="o">/</span><span class="n">v1beta1</span><span class="w">
+</span><span class="n">authentication</span><span class="o">:</span><span class="w">
+  </span><span class="n">anonymous</span><span class="o">:</span><span class="w">
+    </span><span class="n">enabled</span><span class="o">:</span><span class="w"> </span><span class="n">false</span><span class="w">
+  </span><span class="n">webhook</span><span class="o">:</span><span class="w">
+    </span><span class="n">enabled</span><span class="o">:</span><span class="w"> </span><span class="n">true</span><span class="w">
+  </span><span class="n">x509</span><span class="o">:</span><span class="w">
+    </span><span class="n">clientCAFile</span><span class="o">:</span><span class="w"> </span><span class="s2">"/var/lib/kubernetes/ca.pem"</span><span class="w">
+</span><span class="n">authorization</span><span class="o">:</span><span class="w">
+  </span><span class="n">mode</span><span class="o">:</span><span class="w"> </span><span class="n">Webhook</span><span class="w">
+</span><span class="n">clusterDomain</span><span class="o">:</span><span class="w"> </span><span class="s2">"cluster.local"</span><span class="w">
+</span><span class="n">clusterDNS</span><span class="o">:</span><span class="w">
+  </span><span class="o">-</span><span class="w"> </span><span class="s2">"10.32.0.10"</span><span class="w">
+</span><span class="n">podCIDR</span><span class="o">:</span><span class="w"> </span><span class="s2">"${POD_CIDR}"</span><span class="w">
+</span><span class="n">resolvConf</span><span class="o">:</span><span class="w"> </span><span class="s2">"/run/systemd/resolve/resolv.conf"</span><span class="w">
+</span><span class="n">runtimeRequestTimeout</span><span class="o">:</span><span class="w"> </span><span class="s2">"15m"</span><span class="w">
+</span><span class="n">tlsCertFile</span><span class="o">:</span><span class="w"> </span><span class="s2">"/var/lib/kubelet/${HOSTNAME}.pem"</span><span class="w">
+</span><span class="n">tlsPrivateKeyFile</span><span class="o">:</span><span class="w"> </span><span class="s2">"/var/lib/kubelet/${HOSTNAME}-key.pem"</span><span class="w">
+</span><span class="n">EOF</span><span class="w">
+</span></code></pre></div></div>
+<blockquote>
+  <p>The resolvConf configuration is used to avoid loops when using CoreDNS for service discovery on systems running systemd-resolved.</p>
+</blockquote>
+
+<p>Create the <code class="language-plaintext highlighter-rouge">kubelet.service</code> systemd unit file:</p>
+<div class="language-s highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">cat</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="n">EOF</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">sudo</span><span class="w"> </span><span class="n">tee</span><span class="w"> </span><span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">systemd</span><span class="o">/</span><span class="n">system</span><span class="o">/</span><span class="n">kubelet.service</span><span class="w">
+</span><span class="p">[</span><span class="n">Unit</span><span class="p">]</span><span class="w">
+</span><span class="n">Description</span><span class="o">=</span><span class="n">Kubernetes</span><span class="w"> </span><span class="n">Kubelet</span><span class="w">
+</span><span class="n">Documentation</span><span class="o">=</span><span class="n">https</span><span class="o">://</span><span class="n">github.com</span><span class="o">/</span><span class="n">kubernetes</span><span class="o">/</span><span class="n">kubernetes</span><span class="w">
+</span><span class="n">After</span><span class="o">=</span><span class="n">containerd.service</span><span class="w">
+</span><span class="n">Requires</span><span class="o">=</span><span class="n">containerd.service</span><span class="w">
+
+</span><span class="p">[</span><span class="n">Service</span><span class="p">]</span><span class="w">
+</span><span class="n">ExecStart</span><span class="o">=/</span><span class="n">usr</span><span class="o">/</span><span class="n">local</span><span class="o">/</span><span class="n">bin</span><span class="o">/</span><span class="n">kubelet</span><span class="w"> </span><span class="err">\\</span><span class="w">
+  </span><span class="o">--</span><span class="n">config</span><span class="o">=/</span><span class="n">var</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">kubelet</span><span class="o">/</span><span class="n">kubelet</span><span class="o">-</span><span class="n">config.yaml</span><span class="w"> </span><span class="err">\\</span><span class="w">
+  </span><span class="o">--</span><span class="n">container</span><span class="o">-</span><span class="n">runtime</span><span class="o">=</span><span class="n">remote</span><span class="w"> </span><span class="err">\\</span><span class="w">
+  </span><span class="o">--</span><span class="n">container</span><span class="o">-</span><span class="n">runtime</span><span class="o">-</span><span class="n">endpoint</span><span class="o">=</span><span class="n">unix</span><span class="o">:///</span><span class="n">var</span><span class="o">/</span><span class="n">run</span><span class="o">/</span><span class="n">containerd</span><span class="o">/</span><span class="n">containerd.sock</span><span class="w"> </span><span class="err">\\</span><span class="w">
+  </span><span class="o">--</span><span class="n">image</span><span class="o">-</span><span class="n">pull</span><span class="o">-</span><span class="n">progress</span><span class="o">-</span><span class="n">deadline</span><span class="o">=</span><span class="m">2</span><span class="n">m</span><span class="w"> </span><span class="err">\\</span><span class="w">
+  </span><span class="o">--</span><span class="n">kubeconfig</span><span class="o">=/</span><span class="n">var</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">kubelet</span><span class="o">/</span><span class="n">kubeconfig</span><span class="w"> </span><span class="err">\\</span><span class="w">
+  </span><span class="o">--</span><span class="n">network</span><span class="o">-</span><span class="n">plugin</span><span class="o">=</span><span class="n">cni</span><span class="w"> </span><span class="err">\\</span><span class="w">
+  </span><span class="o">--</span><span class="n">register</span><span class="o">-</span><span class="n">node</span><span class="o">=</span><span class="n">true</span><span class="w"> </span><span class="err">\\</span><span class="w">
+  </span><span class="o">--</span><span class="n">fail</span><span class="o">-</span><span class="n">swap</span><span class="o">-</span><span class="n">on</span><span class="o">=</span><span class="n">false</span><span class="w"> </span><span class="err">\\</span><span class="w">
+  </span><span class="o">--</span><span class="n">v</span><span class="o">=</span><span class="m">2</span><span class="w">
+</span><span class="n">Restart</span><span class="o">=</span><span class="n">on</span><span class="o">-</span><span class="n">failure</span><span class="w">
+</span><span class="n">RestartSec</span><span class="o">=</span><span class="m">5</span><span class="w">
+
+</span><span class="p">[</span><span class="n">Install</span><span class="p">]</span><span class="w">
+</span><span class="n">WantedBy</span><span class="o">=</span><span class="n">multi</span><span class="o">-</span><span class="n">user.target</span><span class="w">
+</span><span class="n">EOF</span><span class="w">
+</span></code></pre></div></div>
+
+<h3 id="configure-the-kubernetes-proxy">Configure the Kubernetes Proxy</h3>
+<div class="language-s highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">sudo</span><span class="w"> </span><span class="n">mv</span><span class="w"> </span><span class="n">kube</span><span class="o">-</span><span class="n">proxy.kubeconfig</span><span class="w"> </span><span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">kube</span><span class="o">-</span><span class="n">proxy</span><span class="o">/</span><span class="n">kubeconfig</span><span class="w">
+</span></code></pre></div></div>
+
+<p>Create the <code class="language-plaintext highlighter-rouge">kube-proxy-config.yaml</code> configuration file:</p>
+<div class="language-s highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">cat</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="n">EOF</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">sudo</span><span class="w"> </span><span class="n">tee</span><span class="w"> </span><span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">kube</span><span class="o">-</span><span class="n">proxy</span><span class="o">/</span><span class="n">kube</span><span class="o">-</span><span class="n">proxy</span><span class="o">-</span><span class="n">config.yaml</span><span class="w">
+</span><span class="n">kind</span><span class="o">:</span><span class="w"> </span><span class="n">KubeProxyConfiguration</span><span class="w">
+</span><span class="n">apiVersion</span><span class="o">:</span><span class="w"> </span><span class="n">kubeproxy.config.k8s.io</span><span class="o">/</span><span class="n">v1alpha1</span><span class="w">
+</span><span class="n">clientConnection</span><span class="o">:</span><span class="w">
+  </span><span class="n">kubeconfig</span><span class="o">:</span><span class="w"> </span><span class="s2">"/var/lib/kube-proxy/kubeconfig"</span><span class="w">
+</span><span class="n">mode</span><span class="o">:</span><span class="w"> </span><span class="s2">"iptables"</span><span class="w">
+</span><span class="n">clusterCIDR</span><span class="o">:</span><span class="w"> </span><span class="s2">"10.200.0.0/16"</span><span class="w">
+</span><span class="n">EOF</span><span class="w">
+</span></code></pre></div></div>
+
+<p>Create the <code class="language-plaintext highlighter-rouge">kube-proxy.service</code> systemd unit file:</p>
+<div class="language-s highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">cat</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="n">EOF</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">sudo</span><span class="w"> </span><span class="n">tee</span><span class="w"> </span><span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">systemd</span><span class="o">/</span><span class="n">system</span><span class="o">/</span><span class="n">kube</span><span class="o">-</span><span class="n">proxy.service</span><span class="w">
+</span><span class="p">[</span><span class="n">Unit</span><span class="p">]</span><span class="w">
+</span><span class="n">Description</span><span class="o">=</span><span class="n">Kubernetes</span><span class="w"> </span><span class="n">Kube</span><span class="w"> </span><span class="n">Proxy</span><span class="w">
+</span><span class="n">Documentation</span><span class="o">=</span><span class="n">https</span><span class="o">://</span><span class="n">github.com</span><span class="o">/</span><span class="n">kubernetes</span><span class="o">/</span><span class="n">kubernetes</span><span class="w">
+
+</span><span class="p">[</span><span class="n">Service</span><span class="p">]</span><span class="w">
+</span><span class="n">ExecStart</span><span class="o">=/</span><span class="n">usr</span><span class="o">/</span><span class="n">local</span><span class="o">/</span><span class="n">bin</span><span class="o">/</span><span class="n">kube</span><span class="o">-</span><span class="n">proxy</span><span class="w"> </span><span class="err">\\</span><span class="w">
+  </span><span class="o">--</span><span class="n">config</span><span class="o">=/</span><span class="n">var</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">kube</span><span class="o">-</span><span class="n">proxy</span><span class="o">/</span><span class="n">kube</span><span class="o">-</span><span class="n">proxy</span><span class="o">-</span><span class="n">config.yaml</span><span class="w">
+</span><span class="n">Restart</span><span class="o">=</span><span class="n">on</span><span class="o">-</span><span class="n">failure</span><span class="w">
+</span><span class="n">RestartSec</span><span class="o">=</span><span class="m">5</span><span class="w">
+
+</span><span class="p">[</span><span class="n">Install</span><span class="p">]</span><span class="w">
+</span><span class="n">WantedBy</span><span class="o">=</span><span class="n">multi</span><span class="o">-</span><span class="n">user.target</span><span class="w">
+</span><span class="n">EOF</span><span class="w">
+</span></code></pre></div></div>
+
+<h3 id="start-the-worker-services">Start the Worker Services</h3>
+<div class="language-s highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="n">sudo</span><span class="w"> </span><span class="n">systemctl</span><span class="w"> </span><span class="n">daemon</span><span class="o">-</span><span class="n">reload</span><span class="w">
+  </span><span class="n">sudo</span><span class="w"> </span><span class="n">systemctl</span><span class="w"> </span><span class="n">enable</span><span class="w"> </span><span class="n">containerd</span><span class="w"> </span><span class="n">kubelet</span><span class="w"> </span><span class="n">kube</span><span class="o">-</span><span class="n">proxy</span><span class="w">
+  </span><span class="n">sudo</span><span class="w"> </span><span class="n">systemctl</span><span class="w"> </span><span class="n">start</span><span class="w"> </span><span class="n">containerd</span><span class="w"> </span><span class="n">kubelet</span><span class="w"> </span><span class="n">kube</span><span class="o">-</span><span class="n">proxy</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+<blockquote>
+  <p>Remember to run the above commands on each worker node: worker-0, worker-1, and worker-2.</p>
+</blockquote>
+
+<h2 id="configuring-kubectl-for-remote-access">Configuring kubectl for Remote Access</h2>
+<h3 id="setup-for-interact-host-machine-to-cluster">Setup for interact Host machine to cluster</h3>
+<p>Go to HOST OS</p>
+<div class="language-s highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">mkdir</span><span class="w"> </span><span class="o">~/</span><span class="n">.kube</span><span class="w">
+</span><span class="n">lxc</span><span class="w"> </span><span class="n">file</span><span class="w"> </span><span class="n">pull</span><span class="w"> </span><span class="n">controller</span><span class="m">-0</span><span class="o">/</span><span class="n">root</span><span class="o">/</span><span class="n">admin.kubeconfig</span><span class="w"> </span><span class="o">~/</span><span class="n">.kube</span><span class="o">/</span><span class="n">config</span><span class="w">
+</span><span class="n">nano</span><span class="w"> </span><span class="o">~/</span><span class="n">.kube</span><span class="o">/</span><span class="n">config</span><span class="w">
+
+</span><span class="c1">### ganti line Server: dengan IP Loadabalancer HAproxy</span><span class="w">
+</span><span class="n">server</span><span class="o">:</span><span class="w"> </span><span class="n">https</span><span class="o">://</span><span class="m">10.240.0.62</span><span class="o">:</span><span class="m">6443</span><span class="w">
+</span><span class="c1">###</span><span class="w">
+</span></code></pre></div></div>
+
+<h2 id="verification">Verification</h2>
+<blockquote>
+  <p>The compute instances created in this tutorial will not have permission to complete this section. Run the following commands from the same machine used to create the compute instances.</p>
+</blockquote>
+
+<p>List the registered Kubernetes nodes go to HOST OS:</p>
+<div class="language-s highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">kubectl</span><span class="w"> </span><span class="n">get</span><span class="w"> </span><span class="n">nodes</span><span class="w"> </span><span class="o">-</span><span class="n">o</span><span class="w"> </span><span class="n">wide</span><span class="w">
+</span></code></pre></div></div>
+<blockquote>
+  <p>Output</p>
+  <div class="language-s highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">NAME</span><span class="w">       </span><span class="n">STATUS</span><span class="w">   </span><span class="n">ROLES</span><span class="w">    </span><span class="n">AGE</span><span class="w">     </span><span class="n">VERSION</span><span class="w">   </span><span class="n">INTERNAL</span><span class="o">-</span><span class="n">IP</span><span class="w">    </span><span class="n">EXTERNAL</span><span class="o">-</span><span class="n">IP</span><span class="w">   </span><span class="n">OS</span><span class="o">-</span><span class="n">IMAGE</span><span class="w">             </span><span class="n">KERNEL</span><span class="o">-</span><span class="n">VERSION</span><span class="w">     </span><span class="n">CONTAINER</span><span class="o">-</span><span class="n">RUNTIME</span><span class="w">
+</span><span class="n">worker</span><span class="m">-0</span><span class="w">   </span><span class="n">Ready</span><span class="w">    </span><span class="o">&lt;</span><span class="n">none</span><span class="o">&gt;</span><span class="w">   </span><span class="m">6</span><span class="n">m44s</span><span class="w">   </span><span class="n">v1.12.0</span><span class="w">   </span><span class="m">10.240.0.79</span><span class="w">    </span><span class="o">&lt;</span><span class="n">none</span><span class="o">&gt;</span><span class="w">        </span><span class="n">Ubuntu</span><span class="w"> </span><span class="m">18.04.4</span><span class="w"> </span><span class="n">LTS</span><span class="w">   </span><span class="m">5.0.0-1036</span><span class="o">-</span><span class="n">azure</span><span class="w">   </span><span class="n">containerd</span><span class="o">://</span><span class="m">1.2.0</span><span class="o">-</span><span class="n">rc.0</span><span class="w">
+</span><span class="n">worker</span><span class="m">-1</span><span class="w">   </span><span class="n">Ready</span><span class="w">    </span><span class="o">&lt;</span><span class="n">none</span><span class="o">&gt;</span><span class="w">   </span><span class="m">6</span><span class="n">m43s</span><span class="w">   </span><span class="n">v1.12.0</span><span class="w">   </span><span class="m">10.240.0.245</span><span class="w">   </span><span class="o">&lt;</span><span class="n">none</span><span class="o">&gt;</span><span class="w">        </span><span class="n">Ubuntu</span><span class="w"> </span><span class="m">18.04.4</span><span class="w"> </span><span class="n">LTS</span><span class="w">   </span><span class="m">5.0.0-1036</span><span class="o">-</span><span class="n">azure</span><span class="w">   </span><span class="n">containerd</span><span class="o">://</span><span class="m">1.2.0</span><span class="o">-</span><span class="n">rc.0</span><span class="w">
+</span><span class="n">worker</span><span class="m">-2</span><span class="w">   </span><span class="n">Ready</span><span class="w">    </span><span class="o">&lt;</span><span class="n">none</span><span class="o">&gt;</span><span class="w">   </span><span class="m">6</span><span class="n">m43s</span><span class="w">   </span><span class="n">v1.12.0</span><span class="w">   </span><span class="m">10.240.0.175</span><span class="w">   </span><span class="o">&lt;</span><span class="n">none</span><span class="o">&gt;</span><span class="w">        </span><span class="n">Ubuntu</span><span class="w"> </span><span class="m">18.04.4</span><span class="w"> </span><span class="n">LTS</span><span class="w">   </span><span class="m">5.0.0-1036</span><span class="o">-</span><span class="n">azure</span><span class="w">   </span><span class="n">containerd</span><span class="o">://</span><span class="m">1.2.0</span><span class="o">-</span><span class="n">rc.0</span><span class="w">
+</span></code></pre></div>  </div>
+  <p>Lanjutnye: <a href="http://ammarun.my.id/ngoprek/server/cloud/kubernetes/container/kubernetes-part8/">Provisioning Pod Network Routes - Part 8</a></p>
+</blockquote>
+
+<h2 id="gaskunnnn">Gaskunnnn</h2>
+
+<p><strong>Referensi</strong></p>
+<ul>
+  <li><a href="https://github.com/kelseyhightower/kubernetes-the-hard-way/tree/1.12.0">https://github.com/kelseyhightower/kubernetes-the-hard-way/tree/1.12.0</a></li>
+  <li><a href="https://www.youtube.com/watch?v=2bVK-e-GuYI&amp;t=560s">Kubernetes The Hard Way Just me and Opensource</a></li>
+</ul>
+
+<h1 id="happy--enjoy-ngoprek-">Happy,  Enjoy Ngoprek ~</h1>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> Tags: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/tags/#jekyll" class="page__taxonomy-item" rel="tag">Jekyll</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/#update" class="page__taxonomy-item" rel="tag">update</a>
+    
+    </span>
+  </p>
+
+
+
+
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/categories/#cloud" class="page__taxonomy-item" rel="tag">cloud</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/categories/#container" class="page__taxonomy-item" rel="tag">container</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/categories/#kubernetes" class="page__taxonomy-item" rel="tag">kubernetes</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/categories/#ngoprek" class="page__taxonomy-item" rel="tag">ngoprek</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/categories/#server" class="page__taxonomy-item" rel="tag">server</a>
+    
+    </span>
+  </p>
+
+
+        
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2020-04-14T00:00:00+07:00">April 14, 2020</time></p>
+
+
+      </footer>
+
+      <section class="page__share">
+  
+
+  <a href="https://twitter.com/intent/tweet?text=%5BKubernetes+The+Hard+Way%5D+Bootstrapping+the+Kubernetes+Worker+Nodes+-+Part+7%20http%3A%2F%2F0.0.0.0%3A4000%2Fngoprek%2Fserver%2Fcloud%2Fkubernetes%2Fcontainer%2Fkubernetes-part7%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2F0.0.0.0%3A4000%2Fngoprek%2Fserver%2Fcloud%2Fkubernetes%2Fcontainer%2Fkubernetes-part7%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2F0.0.0.0%3A4000%2Fngoprek%2Fserver%2Fcloud%2Fkubernetes%2Fcontainer%2Fkubernetes-part7%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="/ngoprek/server/cloud/kubernetes/container/kubernetes-part6/" class="pagination--pager" title="[Kubernetes The Hard Way] Bootstrapping the Kubernetes Control Plane - Part 6
+">Previous</a>
+    
+    
+      <a href="/ngoprek/server/cloud/kubernetes/container/kubernetes-part8/" class="pagination--pager" title="[Kubernetes The Hard Way] POD Network Routes - Part 8
+">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h4 class="page__related-title">You May Also Enjoy</h4>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/500x300.jpg" alt="">
+      </div>
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/ngoprek/server/cloud/security/Integrate-CEPH-in-Kolla-OPENSTACK/" rel="permalink">[Openstack] Integrate CEPH in Kolla OPENSTACK
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          3 minute read
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيم
+Integrate CEPH in Kolla OPENSTACK
+
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/500x300.jpg" alt="">
+      </div>
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/ngoprek/server/cloud/security/Honeypot-kippo/" rel="permalink">[Security] Deployment Kippo Honeypot On Linux Ubuntu
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          4 minute read
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيم
+Deployment Kippo Honeypot On Linux Ubuntu
+
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/500x300.jpg" alt="">
+      </div>
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/ngoprek/server/cloud/kubernetes/container/kubernetes-part9/" rel="permalink">[Kubernetes The Hard Way] Deploying the DNS Cluster Add-on - FinalPart 9
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          1 minute read
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيم
+Deploying the DNS Cluster Add-on (Kubernetes The Hardway)
+
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/500x300.jpg" alt="">
+      </div>
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/ngoprek/server/cloud/kubernetes/container/kubernetes-part8/" rel="permalink">[Kubernetes The Hard Way] POD Network Routes - Part 8
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          2 minute read
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيم
+POD Network Routes (Kubernetes The Hardway)
+
+</p>
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+</div>
+
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap"><form class="search-content__form" onkeydown="return event.key != 'Enter';">
+    <label class="sr-only" for="search">
+      Enter your search term...
+    </label>
+    <input type="search" id="search" class="search-input" tabindex="-1" placeholder="Enter your search term..." />
+  </form>
+  <div id="results" class="results"></div></div>
+
+      </div>
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+
+    
+      
+        
+          <li><a href="https://twitter.com/ammarun" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter</a></li>
+        
+      
+        
+          <li><a href="https://github.com/ammarun11" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+        
+      
+        
+          <li><a href="https://instagram.com/ammarun" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-instagram" aria-hidden="true"></i> Instagram</a></li>
+        
+      
+    
+
+    <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2021 My Personal Ngoprek Problems >_. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+  <script src="https://kit.fontawesome.com/4eee35f757.js"></script>
+
+
+
+
+<script src="/assets/js/lunr/lunr.min.js"></script>
+<script src="/assets/js/lunr/lunr-store.js"></script>
+<script src="/assets/js/lunr/lunr-en.js"></script>
+
+
+
+
+    
+  <script>
+    var disqus_config = function () {
+      this.page.url = "http://0.0.0.0:4000/ngoprek/server/cloud/kubernetes/container/kubernetes-part7/";  /* Replace PAGE_URL with your page's canonical URL variable */
+      this.page.identifier = "/ngoprek/server/cloud/kubernetes/container/kubernetes-part7"; /* Replace PAGE_IDENTIFIER with your page's unique identifier variable */
+    };
+    (function() { /* DON'T EDIT BELOW THIS LINE */
+      var d = document, s = d.createElement('script');
+      s.src = 'https://masalahngoprek.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+    })();
+  </script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+  
+
+
+
+
+<script type="text/javascript" async
+	src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML">
+</script>
+
+<script type="text/x-mathjax-config">
+   MathJax.Hub.Config({
+     extensions: ["tex2jax.js"],
+     jax: ["input/TeX", "output/HTML-CSS"],
+     tex2jax: {
+       inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+       displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+       processEscapes: true
+     },
+     "HTML-CSS": { availableFonts: ["TeX"] }
+   });
+</script>
+
+
+  </body>
+</html>

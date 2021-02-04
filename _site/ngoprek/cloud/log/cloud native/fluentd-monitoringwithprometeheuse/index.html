@@ -1,0 +1,817 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.21.0 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>[Fluentd] Monitoring fluentd to prometheus Lab Fluentd - My Personal Ngoprek Problems &gt;_</title>
+<meta name="description" content="بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيم">
+
+
+  <meta name="author" content=">_">
+  
+  <meta property="article:author" content=">_">
+  
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="My Personal Ngoprek Problems >_">
+<meta property="og:title" content="[Fluentd] Monitoring fluentd to prometheus Lab Fluentd">
+<meta property="og:url" content="http://0.0.0.0:4000/ngoprek/cloud/log/cloud%20native/fluentd-monitoringwithprometeheuse/">
+
+
+  <meta property="og:description" content="بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيم">
+
+
+
+
+
+
+
+  <meta property="article:published_time" content="2019-11-09T00:00:00+07:00">
+
+
+
+
+
+
+<link rel="canonical" href="http://0.0.0.0:4000/ngoprek/cloud/log/cloud%20native/fluentd-monitoringwithprometeheuse/">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": null,
+      "url": "http://0.0.0.0:4000/"
+    
+  }
+</script>
+
+
+  <meta name="google-site-verification" content="zKB-7_EmphHj7Wpc-lRmu7BjIVPWRvMJkoqWQQBSjEI" />
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+<link href="/feed.xml" type="application/atom+xml" rel="alternate" title="My Personal Ngoprek Problems >_ Feed">
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css">
+
+<!--[if IE]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single">
+    <nav class="skip-links">
+  <h2 class="screen-reader-text">Skip links</h2>
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+        <a class="site-title" href="/">
+          My Personal Ngoprek Problems >_
+          
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/">🎯 Home</a>
+            </li><li class="masthead__menu-item">
+              <a href="/posts/">📝 Blog</a>
+            </li><li class="masthead__menu-item">
+              <a href="/404.html">🏆 Projects</a>
+            </li><li class="masthead__menu-item">
+              <a href="/categories/">📚 Categories</a>
+            </li><li class="masthead__menu-item">
+              <a href="/about/">👨 About</a>
+            </li></ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <svg class="icon" width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15.99 16">
+            <path d="M15.5,13.12L13.19,10.8a1.69,1.69,0,0,0-1.28-.55l-0.06-.06A6.5,6.5,0,0,0,5.77,0,6.5,6.5,0,0,0,2.46,11.59a6.47,6.47,0,0,0,7.74.26l0.05,0.05a1.65,1.65,0,0,0,.5,1.24l2.38,2.38A1.68,1.68,0,0,0,15.5,13.12ZM6.4,2A4.41,4.41,0,1,1,2,6.4,4.43,4.43,0,0,1,6.4,2Z" transform="translate(-.01)"></path>
+          </svg>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person">
+
+  
+    <div class="author__avatar">
+      
+        <img src="/assets/images/bio-photo.jpg" alt=">_" itemprop="image">
+      
+    </div>
+  
+
+  <div class="author__content">
+    
+      <h3 class="author__name" itemprop="name">>_</h3>
+    
+    
+      <div class="author__bio" itemprop="description">
+        <p>“My name is Ammar and this is my personal blog, documenting my journey on the quest to become the best person I can be.”<br /></p>
+
+      </div>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+
+      
+        
+          
+            <li><a href="https://www.ammarun.my.id" rel="nofollow noopener noreferrer"><i class="fas fa-fw fa-link" aria-hidden="true"></i><span class="label">Website</span></a></li>
+          
+        
+          
+            <li><a href="https://twitter.com/ammarun" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i><span class="label">Twitter</span></a></li>
+          
+        
+          
+            <li><a href="https://github.com/ammarun11" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i><span class="label">GitHub</span></a></li>
+          
+        
+          
+            <li><a href="https://instagram.com/nopallll" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-instagram" aria-hidden="true"></i><span class="label">Instagram</span></a></li>
+          
+        
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="[Fluentd] Monitoring fluentd to prometheus Lab Fluentd">
+    <meta itemprop="description" content="بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيم">
+    <meta itemprop="datePublished" content="2019-11-09T00:00:00+07:00">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title" itemprop="headline">[Fluentd] Monitoring fluentd to prometheus Lab Fluentd
+</h1>
+          
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          1 minute read
+        
+      </span>
+    
+  </p>
+
+
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        
+        <h1 id="بِسْمِ-اللَّهِ-الرَّحْمَنِ-الرَّحِيم">بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيم</h1>
+<hr />
+
+<h3 id="halo-sobat-ambyar-di-tulisan-kali-ini-saya-akan-melanjutkan-lab-fluentd">Halo Sobat ambyar, di tulisan kali ini saya akan melanjutkan lab fluentd.</h3>
+
+<h3 id="monitoring-fluentd-ke-prometheus">Monitoring fluentd ke prometheus</h3>
+
+<h2 id="-ekseskusi-di-node0-">!! Ekseskusi di node0 !!</h2>
+<h3 id="install-prometheus-plugin">Install prometheus plugin</h3>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>td-agent-gem <span class="nb">install </span>fluent-plugin-prometheus
+</code></pre></div></div>
+<h3 id="tambahkan-konfigurasi-td-agentconf">Tambahkan konfigurasi td-agent.conf</h3>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>vim /etc/td-agent/td-agent.conf
+
+<span class="nt">---</span>
+&lt;<span class="nb">source</span><span class="o">&gt;</span>
+   @type prometheus
+   <span class="nb">bind </span>0.0.0.0
+   port 24231
+&lt;/source&gt;
+
+&lt;filter docker.<span class="k">**</span><span class="o">&gt;</span>
+   @type prometheus
+   &lt;metric&gt;
+      name docker_command_log
+      <span class="nb">type </span>counter
+      desc total docker commands
+      <span class="c">#key log</span>
+   &lt;/metric&gt;
+&lt;/filter&gt;
+
+&lt;match docker.<span class="k">*</span><span class="o">&gt;</span>
+   @type copy
+   &lt;store&gt;
+      @type stdout
+   &lt;/store&gt;
+&lt;/match&gt;
+<span class="nt">---</span>
+
+<span class="nb">sudo </span>systemctl restart td-agent.service
+</code></pre></div></div>
+<hr />
+<h2 id="-eksekusi-di-node-1-">!! Eksekusi di Node 1 !!</h2>
+
+<h3 id="install-prometheus">Install prometheus</h3>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo</span> <span class="nt">-i</span>
+
+<span class="nb">cd</span> /opt
+
+wget https://github.com/prometheus/prometheus/releases/download/v2.9.2/prometheus-2.9.2.linux-amd64.tar.gz
+
+<span class="nb">tar </span>xvfz prometheus-2.9.2.linux-amd64.tar.gz
+
+<span class="nb">cd </span>prometheus-2.9.2.linux-amd64
+</code></pre></div></div>
+<p>Tambahkan text berikut untuk target fluentd yang ada di node0</p>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>vim prometheus.yml
+<span class="nt">---</span>
+  - job_name: <span class="s1">'fluentd'</span>
+    static_configs:
+    - targets: <span class="o">[</span><span class="s1">'10.0.0.10:24231'</span><span class="o">]</span>  <span class="c"># IP node0 fluentd</span>
+<span class="nt">---</span>
+</code></pre></div></div>
+<h3 id="start-prometheus">Start prometheus</h3>
+
+<p>./prometheus –config.file=/opt/prometheus-2.9.2.linux-amd64/prometheus.yml</p>
+
+<p><strong>Akses prometheus http://[ip-public-node1]:9090/targets</strong></p>
+
+<p><img src="https://raw.githubusercontent.com/ammarun11/ammarun11.github.io/master/static/img/_posts/3-fl-adm-J.png" alt="fluentd-target" /></p>
+
+<h3 id="lakukan-curl-metrics-fluentd-ke-ip-node0">Lakukan curl metrics fluentd ke ip Node0</h3>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl http://[10.0.0.10]:24231/metrics
+
+root@pod03-node1:~# curl 10.0.0.10:24231/metrics
+<span class="c"># TYPE docker_command_log counter</span>
+<span class="c"># HELP docker_command_log total docker commands</span>
+</code></pre></div></div>
+
+<h1 id="eksekusi-di-node0">Eksekusi di Node0</h1>
+
+<h3 id="jalankan-container-docker">Jalankan container docker</h3>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>docker run <span class="nt">-ti</span> <span class="nt">--name</span> <span class="nb">test</span> <span class="nt">--log-driver</span><span class="o">=</span>fluentd <span class="nt">--log-opt</span> <span class="nv">tag</span><span class="o">=</span><span class="s2">"docker."</span> ubuntu /bin/bash
+</code></pre></div></div>
+
+<h3 id="masukan-perintah">Masukan perintah</h3>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">echo </span>1
+<span class="nb">echo </span>2
+<span class="nb">echo</span> <span class="s2">"Hallo, Nolsatu 03"</span>
+</code></pre></div></div>
+
+<h3 id="query-prometheus">Query prometheus</h3>
+
+<p><strong>Akses http://[ip-public-node1]:9090/graph</strong></p>
+
+<p>Pada form expression ketikkan: <code class="language-plaintext highlighter-rouge">docker_command_log</code>
+Klik execute</p>
+
+<p><strong>HASIL GRAPHnya</strong>
+<img src="https://raw.githubusercontent.com/ammarun11/ammarun11.github.io/master/static/img/_posts/3-fl-adm-M.png" alt="fluentd-graph" /></p>
+
+<p>Hasil log nya.</p>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>root@pod03-node0:~# <span class="nb">tail</span> <span class="nt">-f</span> /var/log/td-agent/td-agent.log
+
+
+2019-11-09 17:26:49 +0000 <span class="o">[</span>info]: <span class="c">#0 [input_forward] listening port port=24224 bind="0.0.0.0"</span>
+2019-11-09 17:26:49 +0000 <span class="o">[</span>info]: <span class="c">#0 fluentd worker is now running worker=0</span>
+2019-11-09 17:29:25.000000000 +0000 docker.e5b15a62701f: <span class="o">{</span><span class="s2">"container_name"</span>:<span class="s2">"/test"</span>,<span class="s2">"source"</span>:<span class="s2">"stdout"</span>,<span class="s2">"log"</span>:<span class="s2">"</span><span class="se">\u</span><span class="s2">001b]0;root@e5b15a62701f: /</span><span class="se">\u</span><span class="s2">0007root@e5b15a62701f:/# "</span>,<span class="s2">"partial_message"</span>:<span class="s2">"true"</span>,<span class="s2">"partial_id"</span>:<span class="s2">"b62db46369eaf2ab02372ee97ad9d06f957585105396cf3d333cb216e62cbabe"</span>,<span class="s2">"partial_ordinal"</span>:<span class="s2">"1"</span>,<span class="s2">"partial_last"</span>:<span class="s2">"false"</span>,<span class="s2">"container_id"</span>:<span class="s2">"e5b15a62701f6efc6f642c8c3f9adfe604a22300ccf72e3ed26b320a933b0ee6"</span><span class="o">}</span>
+2019-11-09 17:29:34.000000000 +0000 docker.a58c00198394: <span class="o">{</span><span class="s2">"log"</span>:<span class="s2">"</span><span class="se">\u</span><span class="s2">001b]0;root@a58c00198394: /</span><span class="se">\u</span><span class="s2">0007root@a58c00198394:/# </span><span class="se">\r\u</span><span class="s2">001b[K</span><span class="se">\u</span><span class="s2">001b]0;root@a58c00198394: /</span><span class="se">\u</span><span class="s2">0007root@a58c00198394:/# echo 1</span><span class="se">\r</span><span class="s2">"</span>,<span class="s2">"container_id"</span>:<span class="s2">"a58c0019839446c57c11f3fc0bc66d97e14221cb070e92a3d408c716a22f0357"</span>,<span class="s2">"container_name"</span>:<span class="s2">"/test"</span>,<span class="s2">"source"</span>:<span class="s2">"stdout"</span><span class="o">}</span>
+2019-11-09 17:29:34.000000000 +0000 docker.a58c00198394: <span class="o">{</span><span class="s2">"container_id"</span>:<span class="s2">"a58c0019839446c57c11f3fc0bc66d97e14221cb070e92a3d408c716a22f0357"</span>,<span class="s2">"container_name"</span>:<span class="s2">"/test"</span>,<span class="s2">"source"</span>:<span class="s2">"stdout"</span>,<span class="s2">"log"</span>:<span class="s2">"1</span><span class="se">\r</span><span class="s2">"</span><span class="o">}</span>
+2019-11-09 17:29:34.000000000 +0000 docker.a58c00198394: <span class="o">{</span><span class="s2">"log"</span>:<span class="s2">"</span><span class="se">\u</span><span class="s2">001b]0;root@a58c00198394: /</span><span class="se">\u</span><span class="s2">0007root@a58c00198394:/# echo 2</span><span class="se">\r</span><span class="s2">"</span>,<span class="s2">"container_id"</span>:<span class="s2">"a58c0019839446c57c11f3fc0bc66d97e14221cb070e92a3d408c716a22f0357"</span>,<span class="s2">"container_name"</span>:<span class="s2">"/test"</span>,<span class="s2">"source"</span>:<span class="s2">"stdout"</span><span class="o">}</span>
+2019-11-09 17:29:34.000000000 +0000 docker.a58c00198394: <span class="o">{</span><span class="s2">"source"</span>:<span class="s2">"stdout"</span>,<span class="s2">"log"</span>:<span class="s2">"2</span><span class="se">\r</span><span class="s2">"</span>,<span class="s2">"container_id"</span>:<span class="s2">"a58c0019839446c57c11f3fc0bc66d97e14221cb070e92a3d408c716a22f0357"</span>,<span class="s2">"container_name"</span>:<span class="s2">"/test"</span><span class="o">}</span>
+2019-11-09 17:29:34.000000000 +0000 docker.a58c00198394: <span class="o">{</span><span class="s2">"source"</span>:<span class="s2">"stdout"</span>,<span class="s2">"log"</span>:<span class="s2">"</span><span class="se">\u</span><span class="s2">001b]0;root@a58c00198394: /</span><span class="se">\u</span><span class="s2">0007root@a58c00198394:/# echo </span><span class="se">\"</span><span class="s2">Hallo, Nolsatu 03</span><span class="se">\"\r</span><span class="s2">"</span>,<span class="s2">"container_id"</span>:<span class="s2">"a58c0019839446c57c11f3fc0bc66d97e14221cb070e92a3d408c716a22f0357"</span>,<span class="s2">"container_name"</span>:<span class="s2">"/test"</span><span class="o">}</span>
+2019-11-09 17:29:34.000000000 +0000 docker.a58c00198394: <span class="o">{</span><span class="s2">"log"</span>:<span class="s2">"Hallo, Nolsatu 03</span><span class="se">\r</span><span class="s2">"</span>,<span class="s2">"container_id"</span>:<span class="s2">"a58c0019839446c57c11f3fc0bc66d97e14221cb070e92a3d408c716a22f0357"</span>,<span class="s2">"container_name"</span>:<span class="s2">"/test"</span>,<span class="s2">"source"</span>:<span class="s2">"stdout"</span><span class="o">}</span>
+2019-11-09 17:29:35.000000000 +0000 docker.a58c00198394: <span class="o">{</span><span class="s2">"source"</span>:<span class="s2">"stdout"</span>,<span class="s2">"log"</span>:<span class="s2">"</span><span class="se">\u</span><span class="s2">001b]0;root@a58c00198394: /</span><span class="se">\u</span><span class="s2">0007root@a58c00198394:/# </span><span class="se">\r</span><span class="s2">"</span>,<span class="s2">"container_id"</span>:<span class="s2">"a58c0019839446c57c11f3fc0bc66d97e14221cb070e92a3d408c716a22f0357"</span>,<span class="s2">"container_name"</span>:<span class="s2">"/test"</span><span class="o">}</span>
+</code></pre></div></div>
+<p><strong>Referensi</strong></p>
+<ul>
+  <li><a href="https://docs.fluentd.org/deployment/monitoring-prometheus">https://docs.fluentd.org/deployment/monitoring-prometheus</a></li>
+</ul>
+
+<h1 id="happy--enjoy-ngoprek">Happy,  Enjoy ngoprek~</h1>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+
+
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/categories/#cloud-native" class="page__taxonomy-item" rel="tag">cloud native</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/categories/#cloud" class="page__taxonomy-item" rel="tag">cloud</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/categories/#log" class="page__taxonomy-item" rel="tag">log</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/categories/#ngoprek" class="page__taxonomy-item" rel="tag">ngoprek</a>
+    
+    </span>
+  </p>
+
+
+        
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2019-11-09T00:00:00+07:00">November 9, 2019</time></p>
+
+
+      </footer>
+
+      <section class="page__share">
+  
+
+  <a href="https://twitter.com/intent/tweet?text=%5BFluentd%5D+Monitoring+fluentd+to+prometheus+Lab+Fluentd%20http%3A%2F%2F0.0.0.0%3A4000%2Fngoprek%2Fcloud%2Flog%2Fcloud%2520native%2Ffluentd-monitoringwithprometeheuse%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2F0.0.0.0%3A4000%2Fngoprek%2Fcloud%2Flog%2Fcloud%2520native%2Ffluentd-monitoringwithprometeheuse%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2F0.0.0.0%3A4000%2Fngoprek%2Fcloud%2Flog%2Fcloud%2520native%2Ffluentd-monitoringwithprometeheuse%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="/ngoprek/cloud/log/cloud%20native/fluentd-logging-nodejs/" class="pagination--pager" title="[Fluentd] Logging NodeJS Lab Fluentd
+">Previous</a>
+    
+    
+      <a href="/ngoprek/cloud/log/cloud%20native/fluentd-nginx-logging/" class="pagination--pager" title="[Fluentd] Logging Nginx Web Server dengan Docker Container Lab Fluentd
+">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h4 class="page__related-title">You May Also Enjoy</h4>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/500x300.jpg" alt="">
+      </div>
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/ngoprek/server/cloud/security/Integrate-CEPH-in-Kolla-OPENSTACK/" rel="permalink">[Openstack] Integrate CEPH in Kolla OPENSTACK
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          3 minute read
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيم
+Integrate CEPH in Kolla OPENSTACK
+
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/500x300.jpg" alt="">
+      </div>
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/ngoprek/server/cloud/security/Honeypot-kippo/" rel="permalink">[Security] Deployment Kippo Honeypot On Linux Ubuntu
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          4 minute read
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيم
+Deployment Kippo Honeypot On Linux Ubuntu
+
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/500x300.jpg" alt="">
+      </div>
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/ngoprek/server/cloud/kubernetes/container/kubernetes-part9/" rel="permalink">[Kubernetes The Hard Way] Deploying the DNS Cluster Add-on - FinalPart 9
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          1 minute read
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيم
+Deploying the DNS Cluster Add-on (Kubernetes The Hardway)
+
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/500x300.jpg" alt="">
+      </div>
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/ngoprek/server/cloud/kubernetes/container/kubernetes-part8/" rel="permalink">[Kubernetes The Hard Way] POD Network Routes - Part 8
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          2 minute read
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيم
+POD Network Routes (Kubernetes The Hardway)
+
+</p>
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+</div>
+
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap"><form class="search-content__form" onkeydown="return event.key != 'Enter';">
+    <label class="sr-only" for="search">
+      Enter your search term...
+    </label>
+    <input type="search" id="search" class="search-input" tabindex="-1" placeholder="Enter your search term..." />
+  </form>
+  <div id="results" class="results"></div></div>
+
+      </div>
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+
+    
+      
+        
+          <li><a href="https://twitter.com/ammarun" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter</a></li>
+        
+      
+        
+          <li><a href="https://github.com/ammarun11" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+        
+      
+        
+          <li><a href="https://instagram.com/ammarun" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-instagram" aria-hidden="true"></i> Instagram</a></li>
+        
+      
+    
+
+    <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2021 My Personal Ngoprek Problems >_. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+  <script src="https://kit.fontawesome.com/4eee35f757.js"></script>
+
+
+
+
+<script src="/assets/js/lunr/lunr.min.js"></script>
+<script src="/assets/js/lunr/lunr-store.js"></script>
+<script src="/assets/js/lunr/lunr-en.js"></script>
+
+
+
+
+    
+  <script>
+    var disqus_config = function () {
+      this.page.url = "http://0.0.0.0:4000/ngoprek/cloud/log/cloud%20native/fluentd-monitoringwithprometeheuse/";  /* Replace PAGE_URL with your page's canonical URL variable */
+      this.page.identifier = "/ngoprek/cloud/log/cloud%20native/fluentd-monitoringwithprometeheuse"; /* Replace PAGE_IDENTIFIER with your page's unique identifier variable */
+    };
+    (function() { /* DON'T EDIT BELOW THIS LINE */
+      var d = document, s = d.createElement('script');
+      s.src = 'https://masalahngoprek.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+    })();
+  </script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+  
+
+
+
+
+<script type="text/javascript" async
+	src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML">
+</script>
+
+<script type="text/x-mathjax-config">
+   MathJax.Hub.Config({
+     extensions: ["tex2jax.js"],
+     jax: ["input/TeX", "output/HTML-CSS"],
+     tex2jax: {
+       inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+       displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+       processEscapes: true
+     },
+     "HTML-CSS": { availableFonts: ["TeX"] }
+   });
+</script>
+
+
+  </body>
+</html>

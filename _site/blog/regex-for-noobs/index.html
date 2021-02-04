@@ -1,0 +1,950 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.21.0 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>Regex For Noobs (like me!) - An Illustrated Guide - My Personal Ngoprek Problems &gt;_</title>
+<meta name="description" content="This blog post is an illustrated guide to regex and aims to provide a gentle introduction for people who never have fiddled with regex, want to, but are kind of intimidated by the whole thing.">
+
+
+  <meta name="author" content=">_">
+  
+  <meta property="article:author" content=">_">
+  
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="My Personal Ngoprek Problems >_">
+<meta property="og:title" content="Regex For Noobs (like me!) - An Illustrated Guide">
+<meta property="og:url" content="http://0.0.0.0:4000/blog/regex-for-noobs/">
+
+
+  <meta property="og:description" content="This blog post is an illustrated guide to regex and aims to provide a gentle introduction for people who never have fiddled with regex, want to, but are kind of intimidated by the whole thing.">
+
+
+
+
+
+
+
+  <meta property="article:published_time" content="2019-08-04T00:00:00+07:00">
+
+
+
+
+
+
+<link rel="canonical" href="http://0.0.0.0:4000/blog/regex-for-noobs/">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": null,
+      "url": "http://0.0.0.0:4000/"
+    
+  }
+</script>
+
+
+  <meta name="google-site-verification" content="zKB-7_EmphHj7Wpc-lRmu7BjIVPWRvMJkoqWQQBSjEI" />
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+<link href="/feed.xml" type="application/atom+xml" rel="alternate" title="My Personal Ngoprek Problems >_ Feed">
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css">
+
+<!--[if IE]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single">
+    <nav class="skip-links">
+  <h2 class="screen-reader-text">Skip links</h2>
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+        <a class="site-title" href="/">
+          My Personal Ngoprek Problems >_
+          
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/">🎯 Home</a>
+            </li><li class="masthead__menu-item">
+              <a href="/posts/">📝 Blog</a>
+            </li><li class="masthead__menu-item">
+              <a href="/404.html">🏆 Projects</a>
+            </li><li class="masthead__menu-item">
+              <a href="/categories/">📚 Categories</a>
+            </li><li class="masthead__menu-item">
+              <a href="/about/">👨 About</a>
+            </li></ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <svg class="icon" width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15.99 16">
+            <path d="M15.5,13.12L13.19,10.8a1.69,1.69,0,0,0-1.28-.55l-0.06-.06A6.5,6.5,0,0,0,5.77,0,6.5,6.5,0,0,0,2.46,11.59a6.47,6.47,0,0,0,7.74.26l0.05,0.05a1.65,1.65,0,0,0,.5,1.24l2.38,2.38A1.68,1.68,0,0,0,15.5,13.12ZM6.4,2A4.41,4.41,0,1,1,2,6.4,4.43,4.43,0,0,1,6.4,2Z" transform="translate(-.01)"></path>
+          </svg>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person">
+
+  
+    <div class="author__avatar">
+      
+        <img src="/assets/images/bio-photo.jpg" alt=">_" itemprop="image">
+      
+    </div>
+  
+
+  <div class="author__content">
+    
+      <h3 class="author__name" itemprop="name">>_</h3>
+    
+    
+      <div class="author__bio" itemprop="description">
+        <p>“My name is Ammar and this is my personal blog, documenting my journey on the quest to become the best person I can be.”<br /></p>
+
+      </div>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+
+      
+        
+          
+            <li><a href="https://www.ammarun.my.id" rel="nofollow noopener noreferrer"><i class="fas fa-fw fa-link" aria-hidden="true"></i><span class="label">Website</span></a></li>
+          
+        
+          
+            <li><a href="https://twitter.com/ammarun" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i><span class="label">Twitter</span></a></li>
+          
+        
+          
+            <li><a href="https://github.com/ammarun11" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i><span class="label">GitHub</span></a></li>
+          
+        
+          
+            <li><a href="https://instagram.com/nopallll" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-instagram" aria-hidden="true"></i><span class="label">Instagram</span></a></li>
+          
+        
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Regex For Noobs (like me!) - An Illustrated Guide">
+    <meta itemprop="description" content="This blog post is an illustrated guide to regex and aims to provide agentle introduction for people who never have fiddled with regex, wantto, but are kind of intimidated by the whole thing.">
+    <meta itemprop="datePublished" content="2019-08-04T00:00:00+07:00">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title" itemprop="headline">Regex For Noobs (like me!) - An Illustrated Guide
+</h1>
+          
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          5 minute read
+        
+      </span>
+    
+  </p>
+
+
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        
+        <p>This blog post is an illustrated guide to regex and aims to provide a
+gentle introduction for people who never have fiddled with regex, want
+to, but are kind of intimidated by the whole thing.</p>
+
+<p>In other words, welcome to …</p>
+
+<p><img src="/assets/2019-08-01-regex/regex-for-noobs.jpg" /></p>
+
+<p>For most people without a formal CS education, regular expressions
+(regex) can come off as something that only the most hardcore unix
+programmers would dare to touch.</p>
+
+<p>A good regex can seem like magic, but remember this: any technology
+sufficiently advanced enough is indistinguishable from magic. So,
+let’s peel away at the magic of regex and see what’s underneath!</p>
+
+<p>If you understand regex it suddenly becomes this super fast and
+powerful tool … but you first need to understand it, and honestly I
+find it a bit intimidating for newcomers!</p>
+
+<p>Let’s start with the basics. What are regular expressions (regex) and what are they used for?</p>
+
+<h1 id="regex-for-noobs">Regex for noobs</h1>
+
+<p>At its core, a regular expression is a <strong>sequence of characters
+defining a search pattern</strong>.</p>
+
+<p>Regex is often used in tools like <code class="language-plaintext highlighter-rouge">grep</code> to find patterns in longer strings of text.</p>
+
+<p>Consider a file <code class="language-plaintext highlighter-rouge">cat.txt</code></p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cat
+</span>cat2
+dog
+</code></pre></div></div>
+
+<p>If we use the regex <code class="language-plaintext highlighter-rouge">cat</code> to search for matches we find the following matches.</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cat
+</span>cat2
+</code></pre></div></div>
+
+<p>(Note for the hardcore powerusers: In this post I’m going to conflate
+the terms regex and the tools that use regex such as grep. This is
+technically wrong, I am aware of this.)</p>
+
+<h1 id="regex-works-on-characters-not-words">Regex works on characters, not words</h1>
+
+<p>One important thing that can not be emphasized enough is this: <strong>regex
+works on characters, not words</strong>.  Concatenation is implied.</p>
+
+<p><img src="/assets/2019-08-01-regex/cat.jpg" /></p>
+
+<p>If we search using regex for the pattern <code class="language-plaintext highlighter-rouge">cat</code>, we are
+not looking for the word “cat”, but we are looking for <code class="language-plaintext highlighter-rouge">c</code> followed by
+<code class="language-plaintext highlighter-rouge">a</code> followed by <code class="language-plaintext highlighter-rouge">t</code>.</p>
+
+<h1 id="the-dot-and-the-asterisk">The dot and the asterisk</h1>
+
+<p>The most basic characters are the single characters, like <code class="language-plaintext highlighter-rouge">a</code>, <code class="language-plaintext highlighter-rouge">b</code>,
+<code class="language-plaintext highlighter-rouge">c</code>, etc. Now let’s introduce two special guests.</p>
+
+<p><img src="/assets/2019-08-01-regex/two-special-guests.jpg" /></p>
+
+<p>The <code class="language-plaintext highlighter-rouge">.</code> (dot) character matches <strong>any single character</strong>. For example, if we
+search for <code class="language-plaintext highlighter-rouge">c.t</code> we would match anything ranging from <code class="language-plaintext highlighter-rouge">cat</code> to <code class="language-plaintext highlighter-rouge">c0t</code>
+or <code class="language-plaintext highlighter-rouge">cAt</code>, we would match any single <code class="language-plaintext highlighter-rouge">c</code> followed by any character
+followed by a single <code class="language-plaintext highlighter-rouge">t</code>.</p>
+
+<p>The <code class="language-plaintext highlighter-rouge">*</code> (asterisk) character is a bit more difficult. It modifies the
+character preceding it and then matches <strong>zero or more characters</strong> of
+that. Yes, read that again, zero or more characters. For example,
+<code class="language-plaintext highlighter-rouge">cat*</code> would match <code class="language-plaintext highlighter-rouge">cat</code>, <code class="language-plaintext highlighter-rouge">catt</code>, <code class="language-plaintext highlighter-rouge">cattttt</code> but <em>also</em> <code class="language-plaintext highlighter-rouge">ca</code>.</p>
+
+<h1 id="the-cat-ate-my-homework">The cat ate my homework</h1>
+
+<p>Imagine we read in a file line by line and the first line is as follows.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>The cat ate my homework.
+</code></pre></div></div>
+
+<p>Let’s look at how we would match the pattern <code class="language-plaintext highlighter-rouge">cat</code> in this line.</p>
+
+<p><img src="/assets/2019-08-01-regex/cat-match.jpg" /></p>
+
+<p>We start with matching the first character of the pattern to the first
+character in the sentence.</p>
+
+<p>If we don’t find a match we skip to the next character in the line and
+start from the first character of the pattern.</p>
+
+<p>If we do find a match we go to the next character in both the pattern
+and the line and repeat this process. When we find a match for the
+whole pattern we return the line in which we find a match.</p>
+
+<p>That’s it! That’s what regex is most often used for at its most basic
+level, to find a smaller search pattern in a larger string.</p>
+
+<p>So far we’ve gone over what regex is and two of the special
+characters, the <code class="language-plaintext highlighter-rouge">.</code> (dot) and the <code class="language-plaintext highlighter-rouge">*</code> (asterisk), but wait, there’s
+more.</p>
+
+<h1 id="the-regex-trifecta">The regex trifecta</h1>
+
+<p>Zooming out a little bit, the parts of a regex can consist of three different components:</p>
+
+<ol>
+  <li>Anchors</li>
+  <li>Character sets</li>
+  <li>Modifiers</li>
+</ol>
+
+<p>These three make up the … regex trifecta!</p>
+
+<p><img src="/assets/2019-08-01-regex/trifecta.jpg" /></p>
+
+<p>Let’s start with the first part of the trifecta: anchors!</p>
+
+<h1 id="anchors">Anchors</h1>
+
+<p><img src="/assets/2019-08-01-regex/anchors.jpg" /></p>
+
+<p>Anchors specify the position of the pattern with respect to the
+line. These are the two most important anchors:</p>
+
+<ul>
+  <li>The <code class="language-plaintext highlighter-rouge">^</code> (caret) fixes your pattern to the beginning of the line. For
+example the pattern <code class="language-plaintext highlighter-rouge">^1</code> matches any line starting with a <code class="language-plaintext highlighter-rouge">1</code>.</li>
+  <li>The <code class="language-plaintext highlighter-rouge">$</code> (dollar) fixes your pattern to the end of the sentence. For
+example, <code class="language-plaintext highlighter-rouge">9$</code> matches any line ending with a <code class="language-plaintext highlighter-rouge">9</code>.</li>
+</ul>
+
+<p>Note that in both cases the pattern has to be respectively first and
+last in the pattern. <code class="language-plaintext highlighter-rouge">^1</code> matches a <code class="language-plaintext highlighter-rouge">1</code> at the start of a line but
+<code class="language-plaintext highlighter-rouge">1^</code> matches a <code class="language-plaintext highlighter-rouge">1</code> followed by a <code class="language-plaintext highlighter-rouge">^</code>. Similarly, <code class="language-plaintext highlighter-rouge">1$</code> matches lines
+ending with a <code class="language-plaintext highlighter-rouge">1</code> but <code class="language-plaintext highlighter-rouge">$1</code> matches a dollar sign followed by a <code class="language-plaintext highlighter-rouge">1</code>
+anywhere on the line.</p>
+
+<p>On to the second part of the trifecta: character sets!</p>
+
+<h1 id="character-sets">Character sets</h1>
+
+<p><img src="/assets/2019-08-01-regex/character-sets.jpg" /></p>
+
+<p>The second part of the trifecta: character sets. Character sets are
+the bread and butter of regex. A single character, say <code class="language-plaintext highlighter-rouge">a</code>, is the
+most atomic character set (a set of one element). But we can do crazy
+stuff with regex like <code class="language-plaintext highlighter-rouge">[0-9]</code> which matches any single digit, or if
+you recall what <code class="language-plaintext highlighter-rouge">*</code> does we can make the pattern <code class="language-plaintext highlighter-rouge">[0-9][0-9]*</code> (what
+this pattern matches is left as an exercise to the reader).</p>
+
+<p>Some other important character sets:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">[0-9]</code> matches any single digit from <code class="language-plaintext highlighter-rouge">0...9</code></li>
+  <li><code class="language-plaintext highlighter-rouge">[a-z]</code> matches any lowercase character</li>
+  <li><code class="language-plaintext highlighter-rouge">[A-Z]</code> matches any uppercase characer</li>
+</ul>
+
+<p>We can also combine multiple sets:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">[A-Za-z0-9]</code> matches any uppercase and lowercase letter and single digit.</li>
+</ul>
+
+<p>Finally, modifiers.</p>
+
+<h1 id="modifiers">Modifiers</h1>
+
+<p>I don’t want to get too much into depth here, but we already came
+across a modifier!  The <code class="language-plaintext highlighter-rouge">*</code> (asterisk) is a modifier. A modifier
+changes the meaning of the character preceding it. There are many
+other modifiers but starting with <code class="language-plaintext highlighter-rouge">*</code> is a good start.</p>
+
+<h1 id="an-actual-example">An actual example</h1>
+
+<p>Let’s quickly dump some text in a file</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">echo</span> <span class="s2">"The cat jumps long time </span><span class="se">\n</span><span class="s2">Then we also have the fact that these are words.</span><span class="se">\n</span><span class="s2">1234 this is a test post please ignore."</span> <span class="o">&gt;&gt;</span> grep.txt
+</code></pre></div></div>
+
+<p>This is what’s in the file now</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">cat </span>grep.txt
+The <span class="nb">cat </span>jumps long <span class="nb">time
+</span>Then we also have the fact that these are words.
+1234 this is a <span class="nb">test </span>post please ignore.
+</code></pre></div></div>
+
+<p>Let’s look for <code class="language-plaintext highlighter-rouge">cat</code></p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">grep</span> <span class="s2">"cat"</span> grep.txt
+The <span class="nb">cat </span>jumps long <span class="nb">time</span>
+</code></pre></div></div>
+
+<p>Let’s look for any line starting with a digit <code class="language-plaintext highlighter-rouge">^[0-9]</code></p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">grep</span> <span class="s2">"^[0-9]"</span> grep.txt
+1234 this is a <span class="nb">test </span>post please ignore.
+</code></pre></div></div>
+
+<p>That’s it! You just used regular expressions. Awesome.</p>
+
+<h1 id="summary">Summary</h1>
+
+<p>In this blog post we went over:</p>
+<ul>
+  <li>Basic functionality of regex</li>
+  <li>The three main components of regex: anchors, character sets, and modifiers.</li>
+  <li>The <code class="language-plaintext highlighter-rouge">.</code> (dot), <code class="language-plaintext highlighter-rouge">*</code> (asterisk), <code class="language-plaintext highlighter-rouge">^</code> (caret), and <code class="language-plaintext highlighter-rouge">$</code> (dollar sign).</li>
+  <li>Some character sets <code class="language-plaintext highlighter-rouge">[0-9]</code>, <code class="language-plaintext highlighter-rouge">[a-z]</code>, <code class="language-plaintext highlighter-rouge">[A-Z]</code>, and combinations.</li>
+</ul>
+
+<p>The goal of this blog post was to make regex a bit more approachable by
+means of an illustrated introduction.</p>
+
+<p>If you peel away at the technical difficulties what you end up with is
+a relatively simple but super powerful tool that will prove invaluable
+in any data scientists’ toolbelt.</p>
+
+<h1 id="subscribe">Subscribe</h1>
+
+<!-- Begin Mailchimp Signup Form -->
+<link href="//cdn-images.mailchimp.com/embedcode/horizontal-slim-10_7.css" rel="stylesheet" type="text/css" />
+
+<style type="text/css">
+  #mc_embed_signup{background:#fff; clear:left; font:14px Helvetica,Arial,sans-serif; width:100%;}
+  /* Add your own Mailchimp form style overrides in your site stylesheet or in this style block.
+     We recommend moving this block and the preceding CSS link to the HEAD of your HTML file. */
+</style>
+
+<div id="mc_embed_signup">
+<form action="https://gmail.us3.list-manage.com/subscribe/post?u=92fe86c389878585bc87837e8&amp;id=50543deff9" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate="">
+    <div id="mc_embed_signup_scroll">
+  <label for="mce-EMAIL">Liked this article and want to hear more?</label>
+  <input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="email address" required="" />
+    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+    <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_92fe86c389878585bc87837e8_50543deff9" tabindex="-1" value="" /></div>
+    <div class="clear"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button" /></div>
+    </div>
+</form>
+</div>
+
+<!--End mc_embed_signup-->
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> Tags: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/tags/#jekyll" class="page__taxonomy-item" rel="tag">Jekyll</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/#update" class="page__taxonomy-item" rel="tag">update</a>
+    
+    </span>
+  </p>
+
+
+
+
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/categories/#blog" class="page__taxonomy-item" rel="tag">blog</a>
+    
+    </span>
+  </p>
+
+
+        
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2019-08-04T00:00:00+07:00">August 4, 2019</time></p>
+
+
+      </footer>
+
+      <section class="page__share">
+  
+
+  <a href="https://twitter.com/intent/tweet?text=Regex+For+Noobs+%28like+me%21%29+-+An+Illustrated+Guide%20http%3A%2F%2F0.0.0.0%3A4000%2Fblog%2Fregex-for-noobs%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2F0.0.0.0%3A4000%2Fblog%2Fregex-for-noobs%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2F0.0.0.0%3A4000%2Fblog%2Fregex-for-noobs%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="/blog/makers-vs-manager/" class="pagination--pager" title="The Maker vs Manager Problem
+">Previous</a>
+    
+    
+      <a href="/ngoprek/server/cloud/intro-azure/" class="pagination--pager" title="[Azure] Introducing Microsoft Azure
+">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h4 class="page__related-title">You May Also Enjoy</h4>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/500x300.jpg" alt="">
+      </div>
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/ngoprek/server/cloud/security/Integrate-CEPH-in-Kolla-OPENSTACK/" rel="permalink">[Openstack] Integrate CEPH in Kolla OPENSTACK
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          3 minute read
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيم
+Integrate CEPH in Kolla OPENSTACK
+
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/500x300.jpg" alt="">
+      </div>
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/ngoprek/server/cloud/security/Honeypot-kippo/" rel="permalink">[Security] Deployment Kippo Honeypot On Linux Ubuntu
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          4 minute read
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيم
+Deployment Kippo Honeypot On Linux Ubuntu
+
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/500x300.jpg" alt="">
+      </div>
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/ngoprek/server/cloud/kubernetes/container/kubernetes-part9/" rel="permalink">[Kubernetes The Hard Way] Deploying the DNS Cluster Add-on - FinalPart 9
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          1 minute read
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيم
+Deploying the DNS Cluster Add-on (Kubernetes The Hardway)
+
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/500x300.jpg" alt="">
+      </div>
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/ngoprek/server/cloud/kubernetes/container/kubernetes-part8/" rel="permalink">[Kubernetes The Hard Way] POD Network Routes - Part 8
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          2 minute read
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيم
+POD Network Routes (Kubernetes The Hardway)
+
+</p>
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+</div>
+
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap"><form class="search-content__form" onkeydown="return event.key != 'Enter';">
+    <label class="sr-only" for="search">
+      Enter your search term...
+    </label>
+    <input type="search" id="search" class="search-input" tabindex="-1" placeholder="Enter your search term..." />
+  </form>
+  <div id="results" class="results"></div></div>
+
+      </div>
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+
+    
+      
+        
+          <li><a href="https://twitter.com/ammarun" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter</a></li>
+        
+      
+        
+          <li><a href="https://github.com/ammarun11" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+        
+      
+        
+          <li><a href="https://instagram.com/ammarun" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-instagram" aria-hidden="true"></i> Instagram</a></li>
+        
+      
+    
+
+    <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2021 My Personal Ngoprek Problems >_. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+  <script src="https://kit.fontawesome.com/4eee35f757.js"></script>
+
+
+
+
+<script src="/assets/js/lunr/lunr.min.js"></script>
+<script src="/assets/js/lunr/lunr-store.js"></script>
+<script src="/assets/js/lunr/lunr-en.js"></script>
+
+
+
+
+    
+  <script>
+    var disqus_config = function () {
+      this.page.url = "http://0.0.0.0:4000/blog/regex-for-noobs/";  /* Replace PAGE_URL with your page's canonical URL variable */
+      this.page.identifier = "/blog/regex-for-noobs"; /* Replace PAGE_IDENTIFIER with your page's unique identifier variable */
+    };
+    (function() { /* DON'T EDIT BELOW THIS LINE */
+      var d = document, s = d.createElement('script');
+      s.src = 'https://masalahngoprek.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+    })();
+  </script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+  
+
+
+
+
+<script type="text/javascript" async
+	src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML">
+</script>
+
+<script type="text/x-mathjax-config">
+   MathJax.Hub.Config({
+     extensions: ["tex2jax.js"],
+     jax: ["input/TeX", "output/HTML-CSS"],
+     tex2jax: {
+       inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+       displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+       processEscapes: true
+     },
+     "HTML-CSS": { availableFonts: ["TeX"] }
+   });
+</script>
+
+
+  </body>
+</html>

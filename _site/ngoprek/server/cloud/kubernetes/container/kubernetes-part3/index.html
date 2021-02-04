@@ -1,0 +1,914 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.21.0 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>[Kubernetes The Hard Way] Generating Kubernetes Configuration Files for Authentication - Part 3 - My Personal Ngoprek Problems &gt;_</title>
+<meta name="description" content="بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيم Generating Kubernetes Configuration Files for Authentication (Kubernetes The Hardway)">
+
+
+  <meta name="author" content=">_">
+  
+  <meta property="article:author" content=">_">
+  
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="My Personal Ngoprek Problems >_">
+<meta property="og:title" content="[Kubernetes The Hard Way] Generating Kubernetes Configuration Files for Authentication - Part 3">
+<meta property="og:url" content="http://0.0.0.0:4000/ngoprek/server/cloud/kubernetes/container/kubernetes-part3/">
+
+
+  <meta property="og:description" content="بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيم Generating Kubernetes Configuration Files for Authentication (Kubernetes The Hardway)">
+
+
+
+
+
+
+
+  <meta property="article:published_time" content="2020-04-13T00:00:00+07:00">
+
+
+
+
+
+
+<link rel="canonical" href="http://0.0.0.0:4000/ngoprek/server/cloud/kubernetes/container/kubernetes-part3/">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": null,
+      "url": "http://0.0.0.0:4000/"
+    
+  }
+</script>
+
+
+  <meta name="google-site-verification" content="zKB-7_EmphHj7Wpc-lRmu7BjIVPWRvMJkoqWQQBSjEI" />
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+<link href="/feed.xml" type="application/atom+xml" rel="alternate" title="My Personal Ngoprek Problems >_ Feed">
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css">
+
+<!--[if IE]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single">
+    <nav class="skip-links">
+  <h2 class="screen-reader-text">Skip links</h2>
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+        <a class="site-title" href="/">
+          My Personal Ngoprek Problems >_
+          
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/">🎯 Home</a>
+            </li><li class="masthead__menu-item">
+              <a href="/posts/">📝 Blog</a>
+            </li><li class="masthead__menu-item">
+              <a href="/404.html">🏆 Projects</a>
+            </li><li class="masthead__menu-item">
+              <a href="/categories/">📚 Categories</a>
+            </li><li class="masthead__menu-item">
+              <a href="/about/">👨 About</a>
+            </li></ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <svg class="icon" width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15.99 16">
+            <path d="M15.5,13.12L13.19,10.8a1.69,1.69,0,0,0-1.28-.55l-0.06-.06A6.5,6.5,0,0,0,5.77,0,6.5,6.5,0,0,0,2.46,11.59a6.47,6.47,0,0,0,7.74.26l0.05,0.05a1.65,1.65,0,0,0,.5,1.24l2.38,2.38A1.68,1.68,0,0,0,15.5,13.12ZM6.4,2A4.41,4.41,0,1,1,2,6.4,4.43,4.43,0,0,1,6.4,2Z" transform="translate(-.01)"></path>
+          </svg>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person">
+
+  
+    <div class="author__avatar">
+      
+        <img src="/assets/images/bio-photo.jpg" alt=">_" itemprop="image">
+      
+    </div>
+  
+
+  <div class="author__content">
+    
+      <h3 class="author__name" itemprop="name">>_</h3>
+    
+    
+      <div class="author__bio" itemprop="description">
+        <p>“My name is Ammar and this is my personal blog, documenting my journey on the quest to become the best person I can be.”<br /></p>
+
+      </div>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+
+      
+        
+          
+            <li><a href="https://www.ammarun.my.id" rel="nofollow noopener noreferrer"><i class="fas fa-fw fa-link" aria-hidden="true"></i><span class="label">Website</span></a></li>
+          
+        
+          
+            <li><a href="https://twitter.com/ammarun" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i><span class="label">Twitter</span></a></li>
+          
+        
+          
+            <li><a href="https://github.com/ammarun11" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i><span class="label">GitHub</span></a></li>
+          
+        
+          
+            <li><a href="https://instagram.com/nopallll" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-instagram" aria-hidden="true"></i><span class="label">Instagram</span></a></li>
+          
+        
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="[Kubernetes The Hard Way] Generating Kubernetes Configuration Files for Authentication - Part 3">
+    <meta itemprop="description" content="بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمGenerating Kubernetes Configuration Files for Authentication (Kubernetes The Hardway)">
+    <meta itemprop="datePublished" content="2020-04-13T00:00:00+07:00">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title" itemprop="headline">[Kubernetes The Hard Way] Generating Kubernetes Configuration Files for Authentication - Part 3
+</h1>
+          
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          2 minute read
+        
+      </span>
+    
+  </p>
+
+
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        
+        <h1 id="بِسْمِ-اللَّهِ-الرَّحْمَنِ-الرَّحِيم">بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيم</h1>
+<h2 id="generating-kubernetes-configuration-files-for-authentication-kubernetes-the-hardway">Generating Kubernetes Configuration Files for Authentication (Kubernetes The Hardway)</h2>
+
+<p>Lanjutkeunn, Lab part 4 
+this lab you will generate <a href="https://kubernetes.io/docs/concepts/configuration/organize-cluster-access-kubeconfig/">Kubernetes configuration files</a>, also known as kubeconfigs, which enable Kubernetes clients to locate and authenticate to the Kubernetes API Servers.</p>
+
+<h3 id="kubernetes-public-ip-address">Kubernetes Public IP Address</h3>
+<p>Each kubeconfig requires a Kubernetes API Server to connect to. To support high availability the IP address assigned to the external load balancer fronting the Kubernetes API Servers will be used.</p>
+
+<p>Using IP LoadBalancer HAproxy,</p>
+<div class="language-s highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">KUBERNETES_PUBLIC_ADDRESS</span><span class="o">=</span><span class="m">10.240.0.62</span><span class="w">
+</span></code></pre></div></div>
+
+<h3 id="the-kubelet-kubernetes-configuration-file">The kubelet Kubernetes Configuration File</h3>
+<p>When generating kubeconfig files for Kubelets the client certificate matching the Kubelet’s node name must be used. This will ensure Kubelets are properly authorized by the Kubernetes Node Authorizer.</p>
+
+<p>Generate a kubeconfig file for each worker node:</p>
+<div class="language-s highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">for</span><span class="w"> </span><span class="n">instance</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">worker</span><span class="m">-0</span><span class="w"> </span><span class="n">worker</span><span class="m">-1</span><span class="w"> </span><span class="n">worker</span><span class="m">-2</span><span class="p">;</span><span class="w"> </span><span class="n">do</span><span class="w">
+  </span><span class="n">kubectl</span><span class="w"> </span><span class="n">config</span><span class="w"> </span><span class="n">set</span><span class="o">-</span><span class="n">cluster</span><span class="w"> </span><span class="n">kubernetes</span><span class="o">-</span><span class="n">the</span><span class="o">-</span><span class="n">hard</span><span class="o">-</span><span class="n">way</span><span class="w"> </span><span class="err">\</span><span class="w">
+    </span><span class="o">--</span><span class="n">certificate</span><span class="o">-</span><span class="n">authority</span><span class="o">=</span><span class="n">ca.pem</span><span class="w"> </span><span class="err">\</span><span class="w">
+    </span><span class="o">--</span><span class="n">embed</span><span class="o">-</span><span class="n">certs</span><span class="o">=</span><span class="n">true</span><span class="w"> </span><span class="err">\</span><span class="w">
+    </span><span class="o">--</span><span class="n">server</span><span class="o">=</span><span class="n">https</span><span class="o">://$</span><span class="p">{</span><span class="n">KUBERNETES_PUBLIC_ADDRESS</span><span class="p">}</span><span class="o">:</span><span class="m">6443</span><span class="w"> </span><span class="err">\</span><span class="w">
+    </span><span class="o">--</span><span class="n">kubeconfig</span><span class="o">=$</span><span class="p">{</span><span class="n">instance</span><span class="p">}</span><span class="n">.kubeconfig</span><span class="w">
+
+  </span><span class="n">kubectl</span><span class="w"> </span><span class="n">config</span><span class="w"> </span><span class="n">set</span><span class="o">-</span><span class="n">credentials</span><span class="w"> </span><span class="n">system</span><span class="o">:</span><span class="n">node</span><span class="o">:$</span><span class="p">{</span><span class="n">instance</span><span class="p">}</span><span class="w"> </span><span class="err">\</span><span class="w">
+    </span><span class="o">--</span><span class="n">client</span><span class="o">-</span><span class="n">certificate</span><span class="o">=$</span><span class="p">{</span><span class="n">instance</span><span class="p">}</span><span class="n">.pem</span><span class="w"> </span><span class="err">\</span><span class="w">
+    </span><span class="o">--</span><span class="n">client</span><span class="o">-</span><span class="n">key</span><span class="o">=$</span><span class="p">{</span><span class="n">instance</span><span class="p">}</span><span class="o">-</span><span class="n">key.pem</span><span class="w"> </span><span class="err">\</span><span class="w">
+    </span><span class="o">--</span><span class="n">embed</span><span class="o">-</span><span class="n">certs</span><span class="o">=</span><span class="n">true</span><span class="w"> </span><span class="err">\</span><span class="w">
+    </span><span class="o">--</span><span class="n">kubeconfig</span><span class="o">=$</span><span class="p">{</span><span class="n">instance</span><span class="p">}</span><span class="n">.kubeconfig</span><span class="w">
+
+  </span><span class="n">kubectl</span><span class="w"> </span><span class="n">config</span><span class="w"> </span><span class="n">set</span><span class="o">-</span><span class="n">context</span><span class="w"> </span><span class="n">default</span><span class="w"> </span><span class="err">\</span><span class="w">
+    </span><span class="o">--</span><span class="n">cluster</span><span class="o">=</span><span class="n">kubernetes</span><span class="o">-</span><span class="n">the</span><span class="o">-</span><span class="n">hard</span><span class="o">-</span><span class="n">way</span><span class="w"> </span><span class="err">\</span><span class="w">
+    </span><span class="o">--</span><span class="n">user</span><span class="o">=</span><span class="n">system</span><span class="o">:</span><span class="n">node</span><span class="o">:$</span><span class="p">{</span><span class="n">instance</span><span class="p">}</span><span class="w"> </span><span class="err">\</span><span class="w">
+    </span><span class="o">--</span><span class="n">kubeconfig</span><span class="o">=$</span><span class="p">{</span><span class="n">instance</span><span class="p">}</span><span class="n">.kubeconfig</span><span class="w">
+
+  </span><span class="n">kubectl</span><span class="w"> </span><span class="n">config</span><span class="w"> </span><span class="n">use</span><span class="o">-</span><span class="n">context</span><span class="w"> </span><span class="n">default</span><span class="w"> </span><span class="o">--</span><span class="n">kubeconfig</span><span class="o">=$</span><span class="p">{</span><span class="n">instance</span><span class="p">}</span><span class="n">.kubeconfig</span><span class="w">
+</span><span class="n">done</span><span class="w">
+</span></code></pre></div></div>
+<blockquote>
+  <p>Results:</p>
+  <div class="language-s highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">worker</span><span class="m">-0</span><span class="n">.kubeconfig</span><span class="w">
+</span><span class="n">worker</span><span class="m">-1</span><span class="n">.kubeconfig</span><span class="w">
+</span><span class="n">worker</span><span class="m">-2</span><span class="n">.kubeconfig</span><span class="w">
+</span></code></pre></div>  </div>
+</blockquote>
+
+<h3 id="the-kube-proxy-kubernetes-configuration-file">The kube-proxy Kubernetes Configuration File</h3>
+<p>Generate a kubeconfig file for the kube-proxy service:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{
+  kubectl config set-cluster kubernetes-the-hard-way \
+    --certificate-authority=ca.pem \
+    --embed-certs=true \
+    --server=https://${KUBERNETES_PUBLIC_ADDRESS}:6443 \
+    --kubeconfig=kube-proxy.kubeconfig
+
+  kubectl config set-credentials system:kube-proxy \
+    --client-certificate=kube-proxy.pem \
+    --client-key=kube-proxy-key.pem \
+    --embed-certs=true \
+    --kubeconfig=kube-proxy.kubeconfig
+
+  kubectl config set-context default \
+    --cluster=kubernetes-the-hard-way \
+    --user=system:kube-proxy \
+    --kubeconfig=kube-proxy.kubeconfig
+
+  kubectl config use-context default --kubeconfig=kube-proxy.kubeconfig
+}
+</code></pre></div></div>
+<blockquote>
+  <p>Results:</p>
+  <div class="language-s highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">kube</span><span class="o">-</span><span class="n">proxy.kubeconfig</span><span class="w">
+</span></code></pre></div>  </div>
+</blockquote>
+
+<h3 id="the-kube-controller-manager-kubernetes-configuration-file">The kube-controller-manager Kubernetes Configuration File</h3>
+<p>Generate a kubeconfig file for the kube-controller-manager service:</p>
+<div class="language-s highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="n">kubectl</span><span class="w"> </span><span class="n">config</span><span class="w"> </span><span class="n">set</span><span class="o">-</span><span class="n">cluster</span><span class="w"> </span><span class="n">kubernetes</span><span class="o">-</span><span class="n">the</span><span class="o">-</span><span class="n">hard</span><span class="o">-</span><span class="n">way</span><span class="w"> </span><span class="err">\</span><span class="w">
+    </span><span class="o">--</span><span class="n">certificate</span><span class="o">-</span><span class="n">authority</span><span class="o">=</span><span class="n">ca.pem</span><span class="w"> </span><span class="err">\</span><span class="w">
+    </span><span class="o">--</span><span class="n">embed</span><span class="o">-</span><span class="n">certs</span><span class="o">=</span><span class="n">true</span><span class="w"> </span><span class="err">\</span><span class="w">
+    </span><span class="o">--</span><span class="n">server</span><span class="o">=</span><span class="n">https</span><span class="o">://</span><span class="m">127.0.0.1</span><span class="o">:</span><span class="m">6443</span><span class="w"> </span><span class="err">\</span><span class="w">
+    </span><span class="o">--</span><span class="n">kubeconfig</span><span class="o">=</span><span class="n">kube</span><span class="o">-</span><span class="n">controller</span><span class="o">-</span><span class="n">manager.kubeconfig</span><span class="w">
+
+  </span><span class="n">kubectl</span><span class="w"> </span><span class="n">config</span><span class="w"> </span><span class="n">set</span><span class="o">-</span><span class="n">credentials</span><span class="w"> </span><span class="n">system</span><span class="o">:</span><span class="n">kube</span><span class="o">-</span><span class="n">controller</span><span class="o">-</span><span class="n">manager</span><span class="w"> </span><span class="err">\</span><span class="w">
+    </span><span class="o">--</span><span class="n">client</span><span class="o">-</span><span class="n">certificate</span><span class="o">=</span><span class="n">kube</span><span class="o">-</span><span class="n">controller</span><span class="o">-</span><span class="n">manager.pem</span><span class="w"> </span><span class="err">\</span><span class="w">
+    </span><span class="o">--</span><span class="n">client</span><span class="o">-</span><span class="n">key</span><span class="o">=</span><span class="n">kube</span><span class="o">-</span><span class="n">controller</span><span class="o">-</span><span class="n">manager</span><span class="o">-</span><span class="n">key.pem</span><span class="w"> </span><span class="err">\</span><span class="w">
+    </span><span class="o">--</span><span class="n">embed</span><span class="o">-</span><span class="n">certs</span><span class="o">=</span><span class="n">true</span><span class="w"> </span><span class="err">\</span><span class="w">
+    </span><span class="o">--</span><span class="n">kubeconfig</span><span class="o">=</span><span class="n">kube</span><span class="o">-</span><span class="n">controller</span><span class="o">-</span><span class="n">manager.kubeconfig</span><span class="w">
+
+  </span><span class="n">kubectl</span><span class="w"> </span><span class="n">config</span><span class="w"> </span><span class="n">set</span><span class="o">-</span><span class="n">context</span><span class="w"> </span><span class="n">default</span><span class="w"> </span><span class="err">\</span><span class="w">
+    </span><span class="o">--</span><span class="n">cluster</span><span class="o">=</span><span class="n">kubernetes</span><span class="o">-</span><span class="n">the</span><span class="o">-</span><span class="n">hard</span><span class="o">-</span><span class="n">way</span><span class="w"> </span><span class="err">\</span><span class="w">
+    </span><span class="o">--</span><span class="n">user</span><span class="o">=</span><span class="n">system</span><span class="o">:</span><span class="n">kube</span><span class="o">-</span><span class="n">controller</span><span class="o">-</span><span class="n">manager</span><span class="w"> </span><span class="err">\</span><span class="w">
+    </span><span class="o">--</span><span class="n">kubeconfig</span><span class="o">=</span><span class="n">kube</span><span class="o">-</span><span class="n">controller</span><span class="o">-</span><span class="n">manager.kubeconfig</span><span class="w">
+
+  </span><span class="n">kubectl</span><span class="w"> </span><span class="n">config</span><span class="w"> </span><span class="n">use</span><span class="o">-</span><span class="n">context</span><span class="w"> </span><span class="n">default</span><span class="w"> </span><span class="o">--</span><span class="n">kubeconfig</span><span class="o">=</span><span class="n">kube</span><span class="o">-</span><span class="n">controller</span><span class="o">-</span><span class="n">manager.kubeconfig</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+<blockquote>
+  <p>Results:</p>
+  <div class="language-s highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">kube</span><span class="o">-</span><span class="n">controller</span><span class="o">-</span><span class="n">manager.kubeconfig</span><span class="w">
+</span></code></pre></div>  </div>
+</blockquote>
+
+<h3 id="the-kube-scheduler-kubernetes-configuration-file">The kube-scheduler Kubernetes Configuration File</h3>
+<p>Generate a kubeconfig file for the kube-scheduler service:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{
+  kubectl config set-cluster kubernetes-the-hard-way \
+    --certificate-authority=ca.pem \
+    --embed-certs=true \
+    --server=https://127.0.0.1:6443 \
+    --kubeconfig=kube-scheduler.kubeconfig
+
+  kubectl config set-credentials system:kube-scheduler \
+    --client-certificate=kube-scheduler.pem \
+    --client-key=kube-scheduler-key.pem \
+    --embed-certs=true \
+    --kubeconfig=kube-scheduler.kubeconfig
+
+  kubectl config set-context default \
+    --cluster=kubernetes-the-hard-way \
+    --user=system:kube-scheduler \
+    --kubeconfig=kube-scheduler.kubeconfig
+
+  kubectl config use-context default --kubeconfig=kube-scheduler.kubeconfig
+}
+</code></pre></div></div>
+<blockquote>
+  <p>Results:</p>
+  <div class="language-s highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">kube</span><span class="o">-</span><span class="n">scheduler.kubeconfig</span><span class="w">
+</span></code></pre></div>  </div>
+</blockquote>
+
+<h3 id="the-admin-kubernetes-configuration-file">The admin Kubernetes Configuration File</h3>
+<p>Generate a kubeconfig file for the admin user:</p>
+<div class="language-s highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="n">kubectl</span><span class="w"> </span><span class="n">config</span><span class="w"> </span><span class="n">set</span><span class="o">-</span><span class="n">cluster</span><span class="w"> </span><span class="n">kubernetes</span><span class="o">-</span><span class="n">the</span><span class="o">-</span><span class="n">hard</span><span class="o">-</span><span class="n">way</span><span class="w"> </span><span class="err">\</span><span class="w">
+    </span><span class="o">--</span><span class="n">certificate</span><span class="o">-</span><span class="n">authority</span><span class="o">=</span><span class="n">ca.pem</span><span class="w"> </span><span class="err">\</span><span class="w">
+    </span><span class="o">--</span><span class="n">embed</span><span class="o">-</span><span class="n">certs</span><span class="o">=</span><span class="n">true</span><span class="w"> </span><span class="err">\</span><span class="w">
+    </span><span class="o">--</span><span class="n">server</span><span class="o">=</span><span class="n">https</span><span class="o">://</span><span class="m">127.0.0.1</span><span class="o">:</span><span class="m">6443</span><span class="w"> </span><span class="err">\</span><span class="w">
+    </span><span class="o">--</span><span class="n">kubeconfig</span><span class="o">=</span><span class="n">admin.kubeconfig</span><span class="w">
+
+  </span><span class="n">kubectl</span><span class="w"> </span><span class="n">config</span><span class="w"> </span><span class="n">set</span><span class="o">-</span><span class="n">credentials</span><span class="w"> </span><span class="n">admin</span><span class="w"> </span><span class="err">\</span><span class="w">
+    </span><span class="o">--</span><span class="n">client</span><span class="o">-</span><span class="n">certificate</span><span class="o">=</span><span class="n">admin.pem</span><span class="w"> </span><span class="err">\</span><span class="w">
+    </span><span class="o">--</span><span class="n">client</span><span class="o">-</span><span class="n">key</span><span class="o">=</span><span class="n">admin</span><span class="o">-</span><span class="n">key.pem</span><span class="w"> </span><span class="err">\</span><span class="w">
+    </span><span class="o">--</span><span class="n">embed</span><span class="o">-</span><span class="n">certs</span><span class="o">=</span><span class="n">true</span><span class="w"> </span><span class="err">\</span><span class="w">
+    </span><span class="o">--</span><span class="n">kubeconfig</span><span class="o">=</span><span class="n">admin.kubeconfig</span><span class="w">
+
+  </span><span class="n">kubectl</span><span class="w"> </span><span class="n">config</span><span class="w"> </span><span class="n">set</span><span class="o">-</span><span class="n">context</span><span class="w"> </span><span class="n">default</span><span class="w"> </span><span class="err">\</span><span class="w">
+    </span><span class="o">--</span><span class="n">cluster</span><span class="o">=</span><span class="n">kubernetes</span><span class="o">-</span><span class="n">the</span><span class="o">-</span><span class="n">hard</span><span class="o">-</span><span class="n">way</span><span class="w"> </span><span class="err">\</span><span class="w">
+    </span><span class="o">--</span><span class="n">user</span><span class="o">=</span><span class="n">admin</span><span class="w"> </span><span class="err">\</span><span class="w">
+    </span><span class="o">--</span><span class="n">kubeconfig</span><span class="o">=</span><span class="n">admin.kubeconfig</span><span class="w">
+
+  </span><span class="n">kubectl</span><span class="w"> </span><span class="n">config</span><span class="w"> </span><span class="n">use</span><span class="o">-</span><span class="n">context</span><span class="w"> </span><span class="n">default</span><span class="w"> </span><span class="o">--</span><span class="n">kubeconfig</span><span class="o">=</span><span class="n">admin.kubeconfig</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+<p>Results:</p>
+<div class="language-s highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">admin.kubeconfig</span><span class="w">
+</span></code></pre></div></div>
+
+<h2 id="distribute-the-kubernetes-configuration-files">Distribute the Kubernetes Configuration Files</h2>
+<p>Copy the appropriate kubelet and kube-proxy kubeconfig files to each worker instance:</p>
+<div class="language-s highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">for</span><span class="w"> </span><span class="n">instance</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">worker</span><span class="m">-0</span><span class="w"> </span><span class="n">worker</span><span class="m">-1</span><span class="w"> </span><span class="n">worker</span><span class="m">-2</span><span class="p">;</span><span class="w"> </span><span class="n">do</span><span class="w">
+  </span><span class="n">lxc</span><span class="w"> </span><span class="n">file</span><span class="w"> </span><span class="n">push</span><span class="w"> </span><span class="o">$</span><span class="p">{</span><span class="n">instance</span><span class="p">}</span><span class="n">.kubeconfig</span><span class="w"> </span><span class="n">kube</span><span class="o">-</span><span class="n">proxy.kubeconfig</span><span class="w"> </span><span class="o">$</span><span class="p">{</span><span class="n">instance</span><span class="p">}</span><span class="o">/</span><span class="n">root</span><span class="o">/</span><span class="w">
+</span><span class="n">done</span><span class="w">
+</span></code></pre></div></div>
+
+<p>Copy the appropriate kube-controller-manager and kube-scheduler kubeconfig files to each controller instance:</p>
+
+<div class="language-s highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">for</span><span class="w"> </span><span class="n">instance</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">controller</span><span class="m">-0</span><span class="w"> </span><span class="n">controller</span><span class="m">-1</span><span class="w"> </span><span class="n">controller</span><span class="m">-2</span><span class="p">;</span><span class="w"> </span><span class="n">do</span><span class="w">
+  </span><span class="n">lxc</span><span class="w"> </span><span class="n">file</span><span class="w"> </span><span class="n">push</span><span class="w"> </span><span class="n">admin.kubeconfig</span><span class="w"> </span><span class="n">kube</span><span class="o">-</span><span class="n">controller</span><span class="o">-</span><span class="n">manager.kubeconfig</span><span class="w"> </span><span class="n">kube</span><span class="o">-</span><span class="n">scheduler.kubeconfig</span><span class="w"> </span><span class="o">$</span><span class="p">{</span><span class="n">instance</span><span class="p">}</span><span class="o">/</span><span class="n">root</span><span class="o">/</span><span class="w">
+</span><span class="n">done</span><span class="w">
+</span></code></pre></div></div>
+
+<blockquote>
+  <p>Verfication</p>
+  <div class="language-s highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">lxc</span><span class="w"> </span><span class="n">exec</span><span class="w"> </span><span class="n">controller</span><span class="m">-0</span><span class="w"> </span><span class="n">ls</span><span class="w">
+</span><span class="n">lxc</span><span class="w"> </span><span class="n">exec</span><span class="w"> </span><span class="n">worker</span><span class="m">-0</span><span class="w"> </span><span class="n">ls</span><span class="w">
+</span></code></pre></div>  </div>
+</blockquote>
+
+<p>Lanjutnye: <a href="https://ammarun.my.id/ngoprek/server/cloud/kubernetes/container/kubernetes-Generating-the-Data-Encryption-Config-and-Key-Part4/">Generating the Data Encryption Config and Key - Part 4</a></p>
+
+<h2 id="gaskunnnn">Gaskunnnn</h2>
+
+<p><strong>Referensi</strong></p>
+<ul>
+  <li><a href="https://github.com/kelseyhightower/kubernetes-the-hard-way/tree/1.12.0">https://github.com/kelseyhightower/kubernetes-the-hard-way/tree/1.12.0</a></li>
+  <li><a href="https://www.youtube.com/watch?v=2bVK-e-GuYI&amp;t=560s">Kubernetes The Hard Way Just me and Opensource</a></li>
+</ul>
+
+<h1 id="happy--enjoy-ngoprek-">Happy,  Enjoy Ngoprek ~</h1>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> Tags: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/tags/#jekyll" class="page__taxonomy-item" rel="tag">Jekyll</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/#update" class="page__taxonomy-item" rel="tag">update</a>
+    
+    </span>
+  </p>
+
+
+
+
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/categories/#cloud" class="page__taxonomy-item" rel="tag">cloud</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/categories/#container" class="page__taxonomy-item" rel="tag">container</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/categories/#kubernetes" class="page__taxonomy-item" rel="tag">kubernetes</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/categories/#ngoprek" class="page__taxonomy-item" rel="tag">ngoprek</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/categories/#server" class="page__taxonomy-item" rel="tag">server</a>
+    
+    </span>
+  </p>
+
+
+        
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2020-04-13T00:00:00+07:00">April 13, 2020</time></p>
+
+
+      </footer>
+
+      <section class="page__share">
+  
+
+  <a href="https://twitter.com/intent/tweet?text=%5BKubernetes+The+Hard+Way%5D+Generating+Kubernetes+Configuration+Files+for+Authentication+-+Part+3%20http%3A%2F%2F0.0.0.0%3A4000%2Fngoprek%2Fserver%2Fcloud%2Fkubernetes%2Fcontainer%2Fkubernetes-part3%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2F0.0.0.0%3A4000%2Fngoprek%2Fserver%2Fcloud%2Fkubernetes%2Fcontainer%2Fkubernetes-part3%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2F0.0.0.0%3A4000%2Fngoprek%2Fserver%2Fcloud%2Fkubernetes%2Fcontainer%2Fkubernetes-part3%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="/ngoprek/server/cloud/kubernetes/container/kubernetes-part2/" class="pagination--pager" title="[Kubernetes The Hard Way] Provisioning a CA and Generating TLS Certificates - Part 2
+">Previous</a>
+    
+    
+      <a href="/ngoprek/server/cloud/kubernetes/container/kubernetes-part4/" class="pagination--pager" title="[Kubernetes The Hard Way] Generating the Data Encryption Config and Key - Part 4
+">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h4 class="page__related-title">You May Also Enjoy</h4>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/500x300.jpg" alt="">
+      </div>
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/ngoprek/server/cloud/security/Integrate-CEPH-in-Kolla-OPENSTACK/" rel="permalink">[Openstack] Integrate CEPH in Kolla OPENSTACK
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          3 minute read
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيم
+Integrate CEPH in Kolla OPENSTACK
+
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/500x300.jpg" alt="">
+      </div>
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/ngoprek/server/cloud/security/Honeypot-kippo/" rel="permalink">[Security] Deployment Kippo Honeypot On Linux Ubuntu
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          4 minute read
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيم
+Deployment Kippo Honeypot On Linux Ubuntu
+
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/500x300.jpg" alt="">
+      </div>
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/ngoprek/server/cloud/kubernetes/container/kubernetes-part9/" rel="permalink">[Kubernetes The Hard Way] Deploying the DNS Cluster Add-on - FinalPart 9
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          1 minute read
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيم
+Deploying the DNS Cluster Add-on (Kubernetes The Hardway)
+
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/500x300.jpg" alt="">
+      </div>
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/ngoprek/server/cloud/kubernetes/container/kubernetes-part8/" rel="permalink">[Kubernetes The Hard Way] POD Network Routes - Part 8
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          2 minute read
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيم
+POD Network Routes (Kubernetes The Hardway)
+
+</p>
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+</div>
+
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap"><form class="search-content__form" onkeydown="return event.key != 'Enter';">
+    <label class="sr-only" for="search">
+      Enter your search term...
+    </label>
+    <input type="search" id="search" class="search-input" tabindex="-1" placeholder="Enter your search term..." />
+  </form>
+  <div id="results" class="results"></div></div>
+
+      </div>
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+
+    
+      
+        
+          <li><a href="https://twitter.com/ammarun" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter</a></li>
+        
+      
+        
+          <li><a href="https://github.com/ammarun11" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+        
+      
+        
+          <li><a href="https://instagram.com/ammarun" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-instagram" aria-hidden="true"></i> Instagram</a></li>
+        
+      
+    
+
+    <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2021 My Personal Ngoprek Problems >_. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+  <script src="https://kit.fontawesome.com/4eee35f757.js"></script>
+
+
+
+
+<script src="/assets/js/lunr/lunr.min.js"></script>
+<script src="/assets/js/lunr/lunr-store.js"></script>
+<script src="/assets/js/lunr/lunr-en.js"></script>
+
+
+
+
+    
+  <script>
+    var disqus_config = function () {
+      this.page.url = "http://0.0.0.0:4000/ngoprek/server/cloud/kubernetes/container/kubernetes-part3/";  /* Replace PAGE_URL with your page's canonical URL variable */
+      this.page.identifier = "/ngoprek/server/cloud/kubernetes/container/kubernetes-part3"; /* Replace PAGE_IDENTIFIER with your page's unique identifier variable */
+    };
+    (function() { /* DON'T EDIT BELOW THIS LINE */
+      var d = document, s = d.createElement('script');
+      s.src = 'https://masalahngoprek.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+    })();
+  </script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+  
+
+
+
+
+<script type="text/javascript" async
+	src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML">
+</script>
+
+<script type="text/x-mathjax-config">
+   MathJax.Hub.Config({
+     extensions: ["tex2jax.js"],
+     jax: ["input/TeX", "output/HTML-CSS"],
+     tex2jax: {
+       inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+       displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+       processEscapes: true
+     },
+     "HTML-CSS": { availableFonts: ["TeX"] }
+   });
+</script>
+
+
+  </body>
+</html>

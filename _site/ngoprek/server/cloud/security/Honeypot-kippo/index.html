@@ -1,0 +1,871 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.21.0 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>[Security] Deployment Kippo Honeypot On Linux Ubuntu - My Personal Ngoprek Problems &gt;_</title>
+<meta name="description" content="بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيم Deployment Kippo Honeypot On Linux Ubuntu">
+
+
+  <meta name="author" content=">_">
+  
+  <meta property="article:author" content=">_">
+  
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="My Personal Ngoprek Problems >_">
+<meta property="og:title" content="[Security] Deployment Kippo Honeypot On Linux Ubuntu">
+<meta property="og:url" content="http://0.0.0.0:4000/ngoprek/server/cloud/security/Honeypot-kippo/">
+
+
+  <meta property="og:description" content="بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيم Deployment Kippo Honeypot On Linux Ubuntu">
+
+
+
+
+
+
+
+  <meta property="article:published_time" content="2020-06-19T00:00:00+07:00">
+
+
+
+
+
+
+<link rel="canonical" href="http://0.0.0.0:4000/ngoprek/server/cloud/security/Honeypot-kippo/">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": null,
+      "url": "http://0.0.0.0:4000/"
+    
+  }
+</script>
+
+
+  <meta name="google-site-verification" content="zKB-7_EmphHj7Wpc-lRmu7BjIVPWRvMJkoqWQQBSjEI" />
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+<link href="/feed.xml" type="application/atom+xml" rel="alternate" title="My Personal Ngoprek Problems >_ Feed">
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css">
+
+<!--[if IE]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single">
+    <nav class="skip-links">
+  <h2 class="screen-reader-text">Skip links</h2>
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+        <a class="site-title" href="/">
+          My Personal Ngoprek Problems >_
+          
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/">🎯 Home</a>
+            </li><li class="masthead__menu-item">
+              <a href="/posts/">📝 Blog</a>
+            </li><li class="masthead__menu-item">
+              <a href="/404.html">🏆 Projects</a>
+            </li><li class="masthead__menu-item">
+              <a href="/categories/">📚 Categories</a>
+            </li><li class="masthead__menu-item">
+              <a href="/about/">👨 About</a>
+            </li></ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <svg class="icon" width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15.99 16">
+            <path d="M15.5,13.12L13.19,10.8a1.69,1.69,0,0,0-1.28-.55l-0.06-.06A6.5,6.5,0,0,0,5.77,0,6.5,6.5,0,0,0,2.46,11.59a6.47,6.47,0,0,0,7.74.26l0.05,0.05a1.65,1.65,0,0,0,.5,1.24l2.38,2.38A1.68,1.68,0,0,0,15.5,13.12ZM6.4,2A4.41,4.41,0,1,1,2,6.4,4.43,4.43,0,0,1,6.4,2Z" transform="translate(-.01)"></path>
+          </svg>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person">
+
+  
+    <div class="author__avatar">
+      
+        <img src="/assets/images/bio-photo.jpg" alt=">_" itemprop="image">
+      
+    </div>
+  
+
+  <div class="author__content">
+    
+      <h3 class="author__name" itemprop="name">>_</h3>
+    
+    
+      <div class="author__bio" itemprop="description">
+        <p>“My name is Ammar and this is my personal blog, documenting my journey on the quest to become the best person I can be.”<br /></p>
+
+      </div>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+
+      
+        
+          
+            <li><a href="https://www.ammarun.my.id" rel="nofollow noopener noreferrer"><i class="fas fa-fw fa-link" aria-hidden="true"></i><span class="label">Website</span></a></li>
+          
+        
+          
+            <li><a href="https://twitter.com/ammarun" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i><span class="label">Twitter</span></a></li>
+          
+        
+          
+            <li><a href="https://github.com/ammarun11" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i><span class="label">GitHub</span></a></li>
+          
+        
+          
+            <li><a href="https://instagram.com/nopallll" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-instagram" aria-hidden="true"></i><span class="label">Instagram</span></a></li>
+          
+        
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="[Security] Deployment Kippo Honeypot On Linux Ubuntu">
+    <meta itemprop="description" content="بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمDeployment Kippo Honeypot On Linux Ubuntu">
+    <meta itemprop="datePublished" content="2020-06-19T00:00:00+07:00">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title" itemprop="headline">[Security] Deployment Kippo Honeypot On Linux Ubuntu
+</h1>
+          
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          4 minute read
+        
+      </span>
+    
+  </p>
+
+
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        
+        <h1 id="بِسْمِ-اللَّهِ-الرَّحْمَنِ-الرَّحِيم">بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيم</h1>
+<h2 id="deployment-kippo-honeypot-on-linux-ubuntu">Deployment Kippo Honeypot On Linux Ubuntu</h2>
+
+<h2 id="honeypot">Honeypot</h2>
+<p>Honeypot merupakan salah satu solusi yang dapat diberikan
+karena honeypot merupakan sebuah sistem umpan atau aplikasi
+simulasi yang mensimulasikan seluruh jaringan untuk memikat
+penyerang dengan menyamarkan diri sebagai sistem yang
+rentan</p>
+
+<p>implementasi
+Kita bakal menggunakan metode honeypot medium interaction memanfaatkan tools aplikasi, yaitu Kippo yang dapat membuat layanan palsu sebagai target serangan dan mencatat aktivitas yang
+dianggap dapat membahayakan sistem dan jaringan, dengan
+adanya interaksi lebih lanjut ketika penyerang melakukan
+mengeksploitasi dan masuk dalam honeypot yang bisa kita trace log nya.</p>
+
+<h2 id="requirements">Requirements</h2>
+<ul>
+  <li>Ubuntu 16.04</li>
+  <li><a href="https://github.com/desaster/kippo/wiki/Running-Kippo">Cara Install dari repo resminyee klik disini yee </a></li>
+</ul>
+
+<h2 id="konfigurasi">Konfigurasi</h2>
+
+<p>Saya sarankan temen temen ikuti cara instalasi di atas jdi kita langsung ke konfig nya aja, 
+lalu kita buat user biasa dulu karena progral kippo berjalanan di non-root user</p>
+
+<p>By default layanan services ssh berjalan di port 22, dan si honeypot ini akan memakai port tersebut untuk menjebak si penyerang maka dari itu kita harus mengganti port ssh aslinya dari port 22 ke yang lain, cara merubahkan ke file,</p>
+
+<div class="language-s highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">sudo</span><span class="w"> </span><span class="n">nano</span><span class="w"> </span><span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">ssh</span><span class="o">/</span><span class="n">sshd_config</span><span class="w">
+
+</span><span class="c1"># Port 22 ubah ke 1945</span><span class="w">
+</span><span class="n">Port</span><span class="w"> </span><span class="m">1945</span><span class="w">
+</span></code></pre></div></div>
+
+<p>Setelah done restart service ssh:</p>
+<div class="language-s highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">$</span><span class="w"> </span><span class="n">sudo</span><span class="w"> </span><span class="n">service</span><span class="w"> </span><span class="n">ssh</span><span class="w"> </span><span class="n">restart</span><span class="w">
+</span></code></pre></div></div>
+
+<p>Buat user non-root untuk honeypot kippo</p>
+<div class="language-s highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">sudo</span><span class="w"> </span><span class="n">adduser</span><span class="w"> </span><span class="n">kippo</span><span class="w">
+</span></code></pre></div></div>
+<p>Tambahkan user kippo ke priveleged ALL</p>
+<div class="language-s highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">sudo</span><span class="w"> </span><span class="n">nano</span><span class="w"> </span><span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">sudoers</span><span class="w">
+
+</span><span class="c1"># User privilege specification</span><span class="w">
+</span><span class="n">root</span><span class="w">    </span><span class="n">ALL</span><span class="o">=</span><span class="p">(</span><span class="n">ALL</span><span class="o">:</span><span class="n">ALL</span><span class="p">)</span><span class="w"> </span><span class="n">ALL</span><span class="w">
+</span><span class="n">kippo</span><span class="w">   </span><span class="n">ALL</span><span class="o">=</span><span class="p">(</span><span class="n">ALL</span><span class="o">:</span><span class="n">ALL</span><span class="p">)</span><span class="w"> </span><span class="n">ALL</span><span class="w">
+</span></code></pre></div></div>
+<p>Sekarang pindah ke user honeypot untuk instalasi Kippo. kita jalankan kippo di virtualenv yang kita buat dari fitur python</p>
+
+<div class="language-s highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">su</span><span class="w"> </span><span class="n">kippo</span><span class="w">
+</span><span class="o">$</span><span class="w"> </span><span class="n">cd</span><span class="w"> </span><span class="o">~</span><span class="w">
+</span><span class="o">$</span><span class="w"> </span><span class="n">git</span><span class="w"> </span><span class="n">clone</span><span class="w"> </span><span class="n">https</span><span class="o">://</span><span class="n">github.com</span><span class="o">/</span><span class="n">desaster</span><span class="o">/</span><span class="n">kippo.git</span><span class="w">
+</span><span class="o">$</span><span class="w"> </span><span class="n">cd</span><span class="w"> </span><span class="n">kippo</span><span class="w">
+</span><span class="o">$</span><span class="w"> </span><span class="n">virtualenv</span><span class="w"> </span><span class="n">env</span><span class="w">
+</span><span class="o">$</span><span class="w"> </span><span class="n">.</span><span class="w"> </span><span class="n">.</span><span class="o">/</span><span class="n">env</span><span class="o">/</span><span class="n">bin</span><span class="o">/</span><span class="n">activate</span><span class="w">
+</span></code></pre></div></div>
+
+<p>Your shell prompt will now display the currently active virtualenv:</p>
+<div class="language-s highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">(</span><span class="n">env</span><span class="p">)</span><span class="o">$</span><span class="w">
+</span></code></pre></div></div>
+
+<p>Install the required python packages</p>
+<div class="language-s highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">(</span><span class="n">env</span><span class="p">)</span><span class="o">$</span><span class="w"> </span><span class="n">pip</span><span class="w"> </span><span class="n">install</span><span class="w"> </span><span class="o">-</span><span class="n">U</span><span class="w"> </span><span class="n">pip</span><span class="w">
+</span><span class="p">(</span><span class="n">env</span><span class="p">)</span><span class="o">$</span><span class="w"> </span><span class="n">pip</span><span class="w"> </span><span class="n">install</span><span class="w"> </span><span class="n">setuptools</span><span class="o">==</span><span class="m">44.0.0</span><span class="w">
+</span><span class="p">(</span><span class="n">env</span><span class="p">)</span><span class="o">$</span><span class="w"> </span><span class="n">pip</span><span class="w"> </span><span class="n">install</span><span class="w"> </span><span class="n">twisted</span><span class="o">==</span><span class="m">15.1.0</span><span class="w">
+</span><span class="p">(</span><span class="n">env</span><span class="p">)</span><span class="o">$</span><span class="w"> </span><span class="n">pip</span><span class="w"> </span><span class="n">install</span><span class="w"> </span><span class="n">pyasn1</span><span class="w">
+</span><span class="p">(</span><span class="n">env</span><span class="p">)</span><span class="o">$</span><span class="w"> </span><span class="n">pip</span><span class="w"> </span><span class="n">install</span><span class="w"> </span><span class="n">pycrypto</span><span class="w">
+</span></code></pre></div></div>
+<p>15.1.0 is the last twisted version that kippo works with</p>
+
+<p>Kippo sendiri secara default berjalan di port 2222. Hal tersebut dikarenakan pada dasarnya Kippo hanya bisa dijalankan oleh non-root user sementara non-root user sendiri tidak diijinkan membuka port dibawah 1024.</p>
+
+<p>Pertama, kita edit edit dulu di bagian kippo.cfg .</p>
+<div class="language-s highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">(</span><span class="n">env</span><span class="p">)</span><span class="o">$</span><span class="w"> </span><span class="n">cp</span><span class="w"> </span><span class="n">kippo.cfg.dist</span><span class="w"> </span><span class="n">kippo.cfg</span><span class="w">
+</span><span class="p">(</span><span class="n">env</span><span class="p">)</span><span class="o">$</span><span class="w"> </span><span class="n">nano</span><span class="w"> </span><span class="n">kippo.cfg</span><span class="w">
+</span></code></pre></div></div>
+
+<p>Edit file config kippo nya</p>
+<div class="language-s highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">ssh_port</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">4672</span><span class="w">
+</span><span class="n">hostname</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Finance</span><span class="w">
+</span><span class="n">log_path</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">log</span><span class="w">
+</span><span class="n">download_path</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dl</span><span class="w">
+</span><span class="n">download_limit_size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1000000</span><span class="w">
+</span></code></pre></div></div>
+
+<p>Untuk konfigurasi lain silahkan dibaca baca sendiri keterangannya. Disini saya menggunakan port 4672 untuk ssh honeypot. Download path adalah lokasi dimana file yang didownload oleh attacker misalnya dengan wget akan disimpan. Sehingga saat hacker mengirim exploit atau malware tidak akan bisa dieksekusi. Download limit digunakan untuk membatasi besarnya download dalam ukuran bytes. Defaultnya tidak dibatasi dan menurut saya tidak baik juga karena bisa saja attacker mengirim file dalam jumlah besar yang menyebabkan server menjadi penuh. Hostname adalah nama komputer yang akan ditampilkan kepada attacker.
+<a href="https://www.linuxsec.org/2017/05/kippo-ssh-honeypot.html">Sumber Linuxsec.org</a></p>
+
+<p>Selanjutnya adalah melakukan redirrect dari port 22 ke port 4672 dengan iptables.</p>
+<div class="language-s highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">(</span><span class="n">env</span><span class="p">)</span><span class="o">$</span><span class="w"> </span><span class="n">sudo</span><span class="w"> </span><span class="n">iptables</span><span class="w"> </span><span class="o">-</span><span class="n">t</span><span class="w"> </span><span class="n">nat</span><span class="w"> </span><span class="o">-</span><span class="n">A</span><span class="w"> </span><span class="n">PREROUTING</span><span class="w"> </span><span class="o">-</span><span class="n">p</span><span class="w"> </span><span class="n">tcp</span><span class="w"> </span><span class="o">--</span><span class="n">dport</span><span class="w"> </span><span class="m">22</span><span class="w"> </span><span class="o">-</span><span class="n">j</span><span class="w"> </span><span class="n">REDIRECT</span><span class="w"> </span><span class="o">--</span><span class="n">to</span><span class="o">-</span><span class="n">port</span><span class="w"> </span><span class="m">4672</span><span class="w">
+</span><span class="p">(</span><span class="n">env</span><span class="p">)</span><span class="o">$</span><span class="w"> </span><span class="n">sudo</span><span class="w"> </span><span class="n">iptables</span><span class="w"> </span><span class="o">-</span><span class="n">I</span><span class="w"> </span><span class="n">INPUT</span><span class="w"> </span><span class="m">5</span><span class="w"> </span><span class="o">-</span><span class="n">p</span><span class="w"> </span><span class="n">tcp</span><span class="w"> </span><span class="o">--</span><span class="n">dport</span><span class="w"> </span><span class="m">4672</span><span class="w"> </span><span class="o">-</span><span class="n">j</span><span class="w"> </span><span class="n">ACCEPT</span><span class="w">
+</span></code></pre></div></div>
+
+<p>Perintah pertama digunakan untuk meredirect port 22 ke 4672 sehingga saat attacker melakukan akses ke port default ssh tetap bisa tersambung. Sementara perintah kedua digunakan untuk mengijinkan koneksi di port 4672. -I INPUT 5 maksudnya adalah rule uptables tersebut akan diletakkan pada baris kelima. Hal ini saya lakukan untuk menghindari rule baru tersimpan di bawah rule DROP. <a href="https://www.linuxsec.org/2017/05/kippo-ssh-honeypot.html">Sumber Linuxsec.org</a></p>
+
+<p>Sampai disini Kippo sudah siap dijalankan. by default Kippo memberi password honeypot atau server palsunya 123456</p>
+
+<p>Starting kippo in foreground jadi secara interactive *saya saranin sih pake ini:</p>
+
+<p>Activate the virtualenv we created before:</p>
+<div class="language-s highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">(</span><span class="n">env</span><span class="p">)</span><span class="o">$</span><span class="w"> </span><span class="n">twistd</span><span class="w"> </span><span class="o">-</span><span class="n">n</span><span class="w"> </span><span class="o">-</span><span class="n">y</span><span class="w"> </span><span class="n">kippo.tac</span><span class="w">
+</span></code></pre></div></div>
+
+<p>OR</p>
+
+<p>Starting kippo in background:
+Dan command ini untuk jalanain honeypot kippi di background services</p>
+<div class="language-s highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">(</span><span class="n">env</span><span class="p">)</span><span class="o">$</span><span class="w"> </span><span class="n">.</span><span class="o">/</span><span class="n">start.sh</span><span class="w"> </span><span class="n">env</span><span class="w">
+</span></code></pre></div></div>
+
+<h2 id="hasil-simulasi">HASIL SIMULASI</h2>
+<p>Di sisi Server akan menjalankan Kippo honeypot secara Interactive</p>
+<div class="language-s highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">(</span><span class="n">env</span><span class="p">)</span><span class="w"> </span><span class="n">kippo</span><span class="o">@</span><span class="n">ubuntu</span><span class="o">:~/</span><span class="n">kippo</span><span class="o">$</span><span class="w"> </span><span class="n">twistd</span><span class="w"> </span><span class="o">-</span><span class="n">n</span><span class="w"> </span><span class="o">-</span><span class="n">y</span><span class="w"> </span><span class="n">kippo.tac</span><span class="w">
+</span><span class="n">Generating</span><span class="w"> </span><span class="n">new</span><span class="w"> </span><span class="n">RSA</span><span class="w"> </span><span class="n">keypair...</span><span class="w">
+</span><span class="n">Done.</span><span class="w">
+</span><span class="n">Generating</span><span class="w"> </span><span class="n">new</span><span class="w"> </span><span class="n">DSA</span><span class="w"> </span><span class="n">keypair...</span><span class="w">
+</span><span class="n">Done.</span><span class="w">
+</span><span class="m">2020-06-19</span><span class="w"> </span><span class="m">14</span><span class="o">:</span><span class="m">10</span><span class="o">:</span><span class="m">45+0700</span><span class="w"> </span><span class="p">[</span><span class="o">-</span><span class="p">]</span><span class="w"> </span><span class="n">Log</span><span class="w"> </span><span class="n">opened.</span><span class="w">
+</span><span class="m">2020-06-19</span><span class="w"> </span><span class="m">14</span><span class="o">:</span><span class="m">10</span><span class="o">:</span><span class="m">45+0700</span><span class="w"> </span><span class="p">[</span><span class="o">-</span><span class="p">]</span><span class="w"> </span><span class="n">twistd</span><span class="w"> </span><span class="m">15.1.0</span><span class="w"> </span><span class="p">(</span><span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">kippo</span><span class="o">/</span><span class="n">kippo</span><span class="o">/</span><span class="n">env</span><span class="o">/</span><span class="n">bin</span><span class="o">/</span><span class="n">python2</span><span class="w"> </span><span class="m">2.7.12</span><span class="p">)</span><span class="w"> </span><span class="n">starting</span><span class="w"> </span><span class="n">up.</span><span class="w">
+</span><span class="m">2020-06-19</span><span class="w"> </span><span class="m">14</span><span class="o">:</span><span class="m">10</span><span class="o">:</span><span class="m">45+0700</span><span class="w"> </span><span class="p">[</span><span class="o">-</span><span class="p">]</span><span class="w"> </span><span class="n">reactor</span><span class="w"> </span><span class="n">class</span><span class="o">:</span><span class="w"> </span><span class="n">twisted.internet.epollreactor.EPollReactor.</span><span class="w">
+</span><span class="m">2020-06-19</span><span class="w"> </span><span class="m">14</span><span class="o">:</span><span class="m">10</span><span class="o">:</span><span class="m">45+0700</span><span class="w"> </span><span class="p">[</span><span class="o">-</span><span class="p">]</span><span class="w"> </span><span class="n">HoneyPotSSHFactory</span><span class="w"> </span><span class="n">starting</span><span class="w"> </span><span class="n">on</span><span class="w"> </span><span class="m">4672</span><span class="w">
+</span><span class="m">2020-06-19</span><span class="w"> </span><span class="m">14</span><span class="o">:</span><span class="m">10</span><span class="o">:</span><span class="m">45+0700</span><span class="w"> </span><span class="p">[</span><span class="o">-</span><span class="p">]</span><span class="w"> </span><span class="n">Starting</span><span class="w"> </span><span class="n">factory</span><span class="w"> </span><span class="o">&lt;</span><span class="n">kippo.core.ssh.HoneyPotSSHFactory</span><span class="w"> </span><span class="n">instance</span><span class="w"> </span><span class="n">at</span><span class="w"> </span><span class="mh">0x7f57c76231b8</span><span class="o">&gt;</span><span class="w">
+</span></code></pre></div></div>
+
+<p>Di Sisi penyerang</p>
+<div class="language-s highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">C</span><span class="o">:</span><span class="err">\</span><span class="n">Users</span><span class="err">\</span><span class="n">cinta</span><span class="o">&gt;</span><span class="n">ssh</span><span class="w"> </span><span class="n">root</span><span class="o">@</span><span class="m">192.168.10.1</span><span class="w"> </span><span class="o">-</span><span class="n">p</span><span class="w"> </span><span class="m">22</span><span class="w">
+</span><span class="n">The</span><span class="w"> </span><span class="n">authenticity</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">host</span><span class="w"> </span><span class="s1">'192.168.10.1 (192.168.10.1)'</span><span class="w"> </span><span class="n">can</span><span class="s1">'t be established.
+RSA key fingerprint is SHA256:w9tOzSOJ1oIL4LW1J50Wj6Mjiv4XNYvjv1f8TOLFg4I.
+Are you sure you want to continue connecting (yes/no)? yes
+Warning: Permanently added '</span><span class="m">192.168.10.1</span><span class="err">'</span><span class="w"> </span><span class="p">(</span><span class="n">RSA</span><span class="p">)</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">list</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">known</span><span class="w"> </span><span class="n">hosts.</span><span class="w">
+</span><span class="n">Password</span><span class="o">:</span><span class="w">
+</span><span class="n">root</span><span class="o">@</span><span class="n">Finance</span><span class="o">:~</span><span class="c1"># echo "Hello World"</span><span class="w">
+</span></code></pre></div></div>
+
+<p>Nah disini si penyerang bisa memasukan command command untuk melakukan hacking pada server tsb namun yang dia serang merupakan server palsu yang dimana tidak akan berpengaruh terhadap server aslinya. Nah command yang di masukkan oleh si penyerang dapat ter log di server aslinya nah disini sysadmin atau netsec dapat mempelajari perilaku penyerang tsb tujuan nya untuk apa dan tools atau malware/virus apa yang digunakan untuk meneyarang server.</p>
+
+<p>Tampilan log disisi Server</p>
+<div class="language-s highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="m">2020-06-19</span><span class="w"> </span><span class="m">14</span><span class="o">:</span><span class="m">17</span><span class="o">:</span><span class="m">57+0700</span><span class="w"> </span><span class="p">[</span><span class="n">SSHChannel</span><span class="w"> </span><span class="n">session</span><span class="w"> </span><span class="p">(</span><span class="m">0</span><span class="p">)</span><span class="w"> </span><span class="n">on</span><span class="w"> </span><span class="n">SSHService</span><span class="w"> </span><span class="n">ssh</span><span class="o">-</span><span class="n">connection</span><span class="w"> </span><span class="n">on</span><span class="w"> </span><span class="n">HoneyPotTransport</span><span class="p">,</span><span class="m">1</span><span class="p">,</span><span class="m">192.168.10.2</span><span class="p">]</span><span class="w"> </span><span class="n">Updating</span><span class="w"> </span><span class="n">realfile</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">honeyfs</span><span class="o">//</span><span class="n">etc</span><span class="o">/</span><span class="n">passwd</span><span class="w">
+</span><span class="m">2020-06-19</span><span class="w"> </span><span class="m">14</span><span class="o">:</span><span class="m">18</span><span class="o">:</span><span class="m">24+0700</span><span class="w"> </span><span class="p">[</span><span class="n">SSHChannel</span><span class="w"> </span><span class="n">session</span><span class="w"> </span><span class="p">(</span><span class="m">0</span><span class="p">)</span><span class="w"> </span><span class="n">on</span><span class="w"> </span><span class="n">SSHService</span><span class="w"> </span><span class="n">ssh</span><span class="o">-</span><span class="n">connection</span><span class="w"> </span><span class="n">on</span><span class="w"> </span><span class="n">HoneyPotTransport</span><span class="p">,</span><span class="m">1</span><span class="p">,</span><span class="m">192.168.10.2</span><span class="p">]</span><span class="w"> </span><span class="n">CMD</span><span class="o">:</span><span class="w"> </span><span class="n">echo</span><span class="w"> </span><span class="s2">"Hello World""
+2020-06-19 14:18:38+0700 [SSHChannel session (0) on SSHService ssh-connection on HoneyPotTransport,1,192.168.10.2] CMD: echo "</span><span class="n">Hello</span><span class="w"> </span><span class="n">World</span><span class="s2">"
+2020-06-19 14:18:38+0700 [SSHChannel session (0) on SSHService ssh-connection on HoneyPotTransport,1,192.168.10.2] Command found: echo "</span><span class="n">Hello</span><span class="w"> </span><span class="n">World</span><span class="err">"</span><span class="w">
+</span></code></pre></div></div>
+
+<p><strong>Referensi</strong></p>
+<ul>
+  <li><a href="https://linuxconfig.org/deployment-of-kippo-ssh-honeypot-on-ubuntu-linux">https://linuxconfig.org/deployment-of-kippo-ssh-honeypot-on-ubuntu-linux</a></li>
+  <li><a href="https://www.linuxsec.org/2017/05/kippo-ssh-honeypot.htmls">https://www.linuxsec.org/2017/05/kippo-ssh-honeypot.html</a></li>
+  <li><a href="https://github.com/desaster/kippo/wiki/Running-Kippos">https://github.com/desaster/kippo/wiki/Running-Kippo</a></li>
+</ul>
+
+<h1 id="happy--enjoy-ngoprek-">Happy,  Enjoy Ngoprek ~</h1>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> Tags: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/tags/#jekyll" class="page__taxonomy-item" rel="tag">Jekyll</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/#update" class="page__taxonomy-item" rel="tag">update</a>
+    
+    </span>
+  </p>
+
+
+
+
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/categories/#cloud" class="page__taxonomy-item" rel="tag">cloud</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/categories/#ngoprek" class="page__taxonomy-item" rel="tag">ngoprek</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/categories/#security" class="page__taxonomy-item" rel="tag">security</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/categories/#server" class="page__taxonomy-item" rel="tag">server</a>
+    
+    </span>
+  </p>
+
+
+        
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2020-06-19T00:00:00+07:00">June 19, 2020</time></p>
+
+
+      </footer>
+
+      <section class="page__share">
+  
+
+  <a href="https://twitter.com/intent/tweet?text=%5BSecurity%5D+Deployment+Kippo+Honeypot+On+Linux+Ubuntu%20http%3A%2F%2F0.0.0.0%3A4000%2Fngoprek%2Fserver%2Fcloud%2Fsecurity%2FHoneypot-kippo%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2F0.0.0.0%3A4000%2Fngoprek%2Fserver%2Fcloud%2Fsecurity%2FHoneypot-kippo%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2F0.0.0.0%3A4000%2Fngoprek%2Fserver%2Fcloud%2Fsecurity%2FHoneypot-kippo%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="/ngoprek/server/cloud/kubernetes/container/kubernetes-part9/" class="pagination--pager" title="[Kubernetes The Hard Way] Deploying the DNS Cluster Add-on - FinalPart 9
+">Previous</a>
+    
+    
+      <a href="/ngoprek/server/cloud/security/Integrate-CEPH-in-Kolla-OPENSTACK/" class="pagination--pager" title="[Openstack] Integrate CEPH in Kolla OPENSTACK
+">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h4 class="page__related-title">You May Also Enjoy</h4>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/500x300.jpg" alt="">
+      </div>
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/ngoprek/server/cloud/security/Integrate-CEPH-in-Kolla-OPENSTACK/" rel="permalink">[Openstack] Integrate CEPH in Kolla OPENSTACK
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          3 minute read
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيم
+Integrate CEPH in Kolla OPENSTACK
+
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/500x300.jpg" alt="">
+      </div>
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/ngoprek/server/cloud/kubernetes/container/kubernetes-part9/" rel="permalink">[Kubernetes The Hard Way] Deploying the DNS Cluster Add-on - FinalPart 9
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          1 minute read
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيم
+Deploying the DNS Cluster Add-on (Kubernetes The Hardway)
+
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/500x300.jpg" alt="">
+      </div>
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/ngoprek/server/cloud/kubernetes/container/kubernetes-part8/" rel="permalink">[Kubernetes The Hard Way] POD Network Routes - Part 8
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          2 minute read
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيم
+POD Network Routes (Kubernetes The Hardway)
+
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/500x300.jpg" alt="">
+      </div>
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/ngoprek/server/cloud/kubernetes/container/kubernetes-part7/" rel="permalink">[Kubernetes The Hard Way] Bootstrapping the Kubernetes Worker Nodes - Part 7
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          3 minute read
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيم
+Bootstrapping the Kubernetes Worker Nodes (Kubernetes The Hardway)
+
+</p>
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+</div>
+
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap"><form class="search-content__form" onkeydown="return event.key != 'Enter';">
+    <label class="sr-only" for="search">
+      Enter your search term...
+    </label>
+    <input type="search" id="search" class="search-input" tabindex="-1" placeholder="Enter your search term..." />
+  </form>
+  <div id="results" class="results"></div></div>
+
+      </div>
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+
+    
+      
+        
+          <li><a href="https://twitter.com/ammarun" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter</a></li>
+        
+      
+        
+          <li><a href="https://github.com/ammarun11" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+        
+      
+        
+          <li><a href="https://instagram.com/ammarun" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-instagram" aria-hidden="true"></i> Instagram</a></li>
+        
+      
+    
+
+    <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2021 My Personal Ngoprek Problems >_. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+  <script src="https://kit.fontawesome.com/4eee35f757.js"></script>
+
+
+
+
+<script src="/assets/js/lunr/lunr.min.js"></script>
+<script src="/assets/js/lunr/lunr-store.js"></script>
+<script src="/assets/js/lunr/lunr-en.js"></script>
+
+
+
+
+    
+  <script>
+    var disqus_config = function () {
+      this.page.url = "http://0.0.0.0:4000/ngoprek/server/cloud/security/Honeypot-kippo/";  /* Replace PAGE_URL with your page's canonical URL variable */
+      this.page.identifier = "/ngoprek/server/cloud/security/Honeypot-kippo"; /* Replace PAGE_IDENTIFIER with your page's unique identifier variable */
+    };
+    (function() { /* DON'T EDIT BELOW THIS LINE */
+      var d = document, s = d.createElement('script');
+      s.src = 'https://masalahngoprek.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+    })();
+  </script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+  
+
+
+
+
+<script type="text/javascript" async
+	src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML">
+</script>
+
+<script type="text/x-mathjax-config">
+   MathJax.Hub.Config({
+     extensions: ["tex2jax.js"],
+     jax: ["input/TeX", "output/HTML-CSS"],
+     tex2jax: {
+       inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+       displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+       processEscapes: true
+     },
+     "HTML-CSS": { availableFonts: ["TeX"] }
+   });
+</script>
+
+
+  </body>
+</html>
