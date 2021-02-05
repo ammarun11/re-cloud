@@ -13,15 +13,14 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-    - name: Build the site in the jekyll/builder container
-      run: |
-        docker run -v ${{ github.workspace }}:/srv/jekyll -v ${{ github.workspace }}/vendor/bundle:/usr/local/bundle --env JEKYLL_ENV=production jekyll/jekyll:3.8 jekyll build
-    
-  deploy:
-    needs: [build]
-    runs-on: ubuntu-latest
-
-    steps:
+    - name: Run Trivy vulnerability scanner      
+      uses: aquasecurity/trivy-action@master
+      with:
+        image-ref: 'jekyll/jekyll:${{ github.sha }}'
+        format: 'table'
+        exit-code: '0'
+        severity: 'MEDIUM,HIGH,CRITICAL'
+ 
     - name: SSH and deploy node app
       uses: appleboy/ssh-action@master
       with:
