@@ -15,7 +15,7 @@ jobs:
     - uses: actions/checkout@v2
     - name: Build the site in the jekyll/builder container
       run: |
-        docker run --rm -it --volume="${{ github.workspace }}:/srv/jekyll" --volume="${{ github.workspace }}/vendor/bundle:/usr/local/bundle" --env JEKYLL_ENV=production jekyll/jekyll:3.8 jekyll build
+        docker run -v ${{ github.workspace }}:/srv/jekyll -v ${{ github.workspace }}/vendor/bundle:/usr/local/bundle --env JEKYLL_ENV=production jekyll/jekyll:3.8 jekyll build
     
   deploy:
     needs: [build]
