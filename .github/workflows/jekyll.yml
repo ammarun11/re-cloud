@@ -32,5 +32,4 @@ jobs:
         key: ${{ secrets.SSH_KEY }}
         port: ${{ secrets.SSH_PORT }}
         script: |
-          cd ~/re-cloud
-          docker run --rm -p 3100:4000 --volume="$PWD:/srv/jekyll" --env JEKYLL_UID=1001 --env JEKYLL_GID=1001 -it jekyll/jekyll:3.8 jekyll serve --watch --drafts
+          docker run --rm -p 3100:4000 --volume="/root/re-cloud:/srv/jekyll" --env JEKYLL_UID=1001 --env JEKYLL_GID=1001 -it jekyll/jekyll:3.8 jekyll serve --watch --drafts
