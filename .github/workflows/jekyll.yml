@@ -13,6 +13,41 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
+      
+   # - name: Build the Docker image
+   #   run: docker build . --file Dockerfile --tag palopalepalo/paloblog:${{ github.sha }}
+    -
+        name: Set up QEMU
+        uses: docker/setup-qemu-action@v1
+    -
+        name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v1
+    -
+        name: Login to DockerHub
+        uses: docker/login-action@v1 
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_PASSWORD }}
+    -
+        name: Build and push
+        id: docker_build
+        uses: docker/build-push-action@v2
+        with:
+          push: true
+          file: ./Dockerfile 
+          tags: palopalepalo/paloblog:${{ github.sha }}
+    -
+        name: Image digest
+        run: echo ${{ steps.docker_build.outputs.digest }}
+        
+    - name: Run Trivy vulnerability scanner      
+      uses: aquasecurity/trivy-action@master
+      with:
+        image-ref: 'palopalepalo/paloblog:${{ github.sha }}'
+        format: 'table'
+        exit-code: '0'
+        severity: 'MEDIUM,HIGH,CRITICAL'
+    
     - name: SSH and deploy node app
       uses: appleboy/ssh-action@master
       with:
@@ -24,13 +59,7 @@ jobs:
           echo "Go agains boiss"
           cd ~/re-cloud
           docker rm -f jekyll-ci
-          docker run --name jekyll-ci -d -p 3100:4000 --volume="$PWD:/srv/jekyll" --env JEKYLL_UID=1001 --env JEKYLL_GID=1001 -it jekyll/jekyll:3.8 jekyll serve
+          docker run --name jekyll-ci -d -p 3100:4000 --volume="$PWD:/srv/jekyll" --env JEKYLL_UID=1001 --env JEKYLL_GID=1001 -it palopalepalo/paloblog:${{ github.sha }} jekyll serve
 
-    - name: Run Trivy vulnerability scanner      
-      uses: aquasecurity/trivy-action@master
-      with:
-        image-ref: 'jekyll/jekyll:${{ github.sha }}'
-        format: 'table'
-        exit-code: '0'
-        severity: 'MEDIUM,HIGH,CRITICAL'
+
  
