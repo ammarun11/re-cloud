@@ -16,7 +16,7 @@ jobs:
     - name: Build the site in the jekyll/builder container
       run: |
         docker run \
-        -v ${{ github.workspace }}:/srv/jekyll -v ${{ github.workspace }}:/srv/jekyll/_site \
+        -v ${{ github.workspace }}:/srv/jekyll -v ${{ github.workspace }}:/srv/jekyll/_site --env JEKYLL_UID=1001 --env JEKYLL_GID=1001 \
         jekyll/builder:latest /bin/bash -c "chmod 777 /srv/jekyll && jekyll build --future"
     
   deploy:
@@ -34,4 +34,5 @@ jobs:
         script: |
           echo "Go agains boiss"
           cd ~/re-cloud
+          docker rm -f jekyll-ci
           docker run --name jekyll-ci -d -p 3100:4000 --volume="$PWD:/srv/jekyll" --env JEKYLL_UID=1001 --env JEKYLL_GID=1001 -it jekyll/jekyll:3.8 jekyll serve
