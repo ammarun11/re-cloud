@@ -25,12 +25,12 @@ jobs:
 
     steps:
     - name: SSH and deploy node app
-      uses: kielabokkie/ssh-key-and-known-hosts-action@v1
+      uses: appleboy/ssh-action@master
       with:
-        ssh-host: root@${{ secrets.SSH_HOST }}
-        #username: ${{ secrets.SSH_USERNAME }}
-        ssh-private-key: ${{ secrets.SSH_KEY }}
-        ssh-port: ${{ secrets.SSH_PORT }}
-        run: |
+        host: ${{ secrets.SSH_HOST }}
+        username: ${{ secrets.SSH_USERNAME }}
+        key: ${{ secrets.SSH_KEY }}
+        port: ${{ secrets.SSH_PORT }}
+        script: |
           echo "test" > palo.txt
           #docker run --rm -p 3100:4000 --volume="/root/re-cloud:/srv/jekyll" --env JEKYLL_UID=1001 --env JEKYLL_GID=1001 -it jekyll/jekyll:3.8 jekyll serve --watch --drafts
