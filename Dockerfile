@@ -1,9 +1,6 @@
-FROM jekyll/jekyll:latest
+FROM jekyll/jekyll:3.8
 
 ADD . /srv/jekyll
-
-ENV JEKYLL_UID=1000 
-ENV JEKYLL_GID=1000
 
 RUN jekyll build
 
