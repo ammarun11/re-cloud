@@ -3,24 +3,26 @@ permalink: /about/
 title: "👨 About"
 ---
 
-# Hi. I'm Muhammad Naufal Ammar.
+# Hi. Saya Muhammad Naufal Ammar.
 
-Saya seorang SysAdmin, berpengalaman lebih dari 2 tahun. Mahasiswa Jurusan Teknik Telekomunikasi yang hobinya Makan ~
+Saya seorang yang tertarik dengan SysAdmin, DevOps dan Programming. Mahasiswa Jurusan Teknik Telekomunikasi yang hobinya Rebahan ~
 
-Server yang saya gunakan adalah CentOS,Debian dan ubuntu dan saya juga mengimplementasikan nya dengan Cloud Computing, Microsoft Azure, Google CLoud Computing dan Alibaba cloid ( Aliyun ) , dan untuk networking saya berpengalaman dengan menggunakan Mikrotik dan Cisco Router.
+Server yang biasa saya gunakan adalah CentOS,Debian dan ubuntu dan saya juga mengimplementasikan nya dengan Cloud Computing Public Cloud & Private Cloud seperti Openstack, Microsoft Azure, Google Cloud Platform dan Alibaba cloud ( Aliyun ) , dan biasa sehari hari menjadi Mahasiwa Akhir.
 
 <img src="/assets/images/bio-photo.jpg" style="max-height: 400px">
 
 That's me!
 
 Summary of Skills (in descending order of importance):
-- Virtualization & Container: KVM, VMWARE ESXi, PROXMOX, Docker
+- Virtualization & Container: KVM, VMWARE ESXi, PROXMOX
+- Containerizaiton : Docker, Podman, LXC
 - Container Orchestration: Kubernetes
 - Configure Management : Ansible, Terraform
 - Cloud Computing : Openstack, Microsoft Azure, Alibaba Cloud, GCP
-- Programming : C++, NodeJS
-- Logging : Prometheus, Grafana, Elasticsearch, fluentd
-- CI/CD : Gitlab, Jenkins
+- Programming : Bash, NodeJS
+- Monitoring & Logging : Prometheus, Grafana, Elasticsearch, fluentd, Loki
+- Storage : Ceph, LVM, OpenIO, MinIO
+- CI/CD : Gitlab CI/CD, Jenkins, Github Actions 
 - Networking : Routing/Switching ( Cisco & Mikrotik )
 - Linux Administration : CentOS, Ubuntu
 - Version Control : Github, Gitlab
@@ -32,10 +34,13 @@ Certificate of competence:
 - Mikrotik Certified Network Associate (2002NA1312)
 - Mikrotik Certified Routing Engineer (2002RE1693 
 - Network Security Expert – NSE1 (FyozaeBSLP)
+- Microsoft Azure Fundamentals - AZ-900 (H429-1374)
+- Linux Foundation Certified System Administrator - LFCS (LF-iy7rocomb2)
+- Linux Foundation Certified Engineer - LFCE (LF-kacc9jqua9)
 
 I am obsessed with:
-- Networking, Cloud Infrastructe, SDN & NFV
-- Software engineering (i.e. writing good code)
+- Networking, Cloud Infrastructe, DevOps
+- Cloud engineering (i.e. Build good Infrastructure)
 - Personal productivity and efficiency
 
 Where I've studied:
