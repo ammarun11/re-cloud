@@ -4,8 +4,7 @@ main:
   - title: "🦴 Blog"
     url: /posts/
   - title: "📝 Note APP"
-    redirect:   http://note.ammarcicd.my.id
-    layout:     redirect
+    url: /note/
   - title: "📚 Categories"
     url: /categories/
   - title: "👨 About"
