@@ -1,0 +1,10 @@
+version: '3'
+
+services:
+  jekyll:
+    image: palopalepalo/paloblog:${SHA}
+    command: jekyll serve --watch --force_polling --verbose
+    ports:
+      - 3000:4000
+    volumes:
+      - .:/srv/jekyll

@@ -1,23 +1,32 @@
-FROM ruby:2.5
+FROM ruby:2.6
 
 RUN apt-get update -qq && apt-get install -y build-essential libpq-dev nodejs
 
 # Reduce layers by grouping related commands into single RUN steps
-RUN groupadd -r -g 1001 appuser && \
-useradd -r -m -u 1001 -g appuser appuser
+RUN groupadd -r -g 1000 appuser && \
+useradd -r -m -u 1000 -g appuser appuser
 
 # Setting workdir will also create the dir if it doesn't exist, so no need to mkdir
-WORKDIR /srv/jekyll
+WORKDIR /home/appuser/myapp
 
 # Copy everything over in one go
-COPY . /srv/jekyll
+COPY . ./
 
 # This line should fix your issue 
 # (give the user ownership of their home dir and make Gemfile.lock writable)
 # Must still be root for this to work
-RUN chown -R appuser:appuser /srv/jekyll && \
-chmod +w /srv/jekyll/Gemfile.lock
+RUN chown -R appuser:appuser /home/appuser/ && \
+chmod +w /home/appuser/myapp/Gemfile.lock
 
 USER appuser
 
+EXPOSE 4000
+
+RUN gem install bundler -v "~>1.0" && gem install bundler jekyll
+
 RUN bundle install
+
+
+ENTRYPOINT [ "jekyll" ]
+
+CMD [ "--help" ]

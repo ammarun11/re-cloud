@@ -62,7 +62,8 @@ jobs:
         port: ${{ secrets.SSH_PORT }}
         script: |
           echo "Go agains boiss"
-          cd ~/re-cloud
+          su ubuntu
+          cd /home/ubuntu/re-cloud
           docker rm -f jekyll-ci
           docker rmi $(docker images -aq)
           docker run --name jekyll-ci -d -p 3000:4000 --volume="$PWD:/srv/jekyll" -it palopalepalo/paloblog:${{ github.sha }} jekyll serve
