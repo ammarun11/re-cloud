@@ -65,7 +65,7 @@ jobs:
           cd ~/re-cloud
           docker rm -f jekyll-ci
           docker rmi $(docker images -aq)
-          docker run --name jekyll-ci -d -p 3000:4000 --volume="$PWD:/srv/jekyll" --env JEKYLL_UID=1001 --env JEKYLL_GID=1001 -it palopalepalo/paloblog:${{ github.sha }} jekyll serve
+          docker run --name jekyll-ci -d -p 3000:4000 --volume="$PWD:/srv/jekyll" -it palopalepalo/paloblog:${{ github.sha }} jekyll serve
 
 
  
