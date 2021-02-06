@@ -4,7 +4,7 @@ ADD . /srv/jekyll
 
 WORKDIR /srv/jekyll
 
-RUN chmod g+w Gemfile.lock
+RUN chmod a+w Gemfile.lock
 
 RUN jekyll build
 
