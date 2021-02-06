@@ -3,9 +3,9 @@ version: "3"
 services:
   web:
     container_name: web
-    image: node
+    image: palopalepalo/paloblog:${{ github.sha }}
     restart: always
-    build: .
+#    build: .
     ports:
       - "4000:4000"
     links:
@@ -21,5 +21,7 @@ services:
     image: mongo
     ports:
       - "27017:27017"
+    volumes: 
+      - /mongo/data:/data/db
     logging:
       driver: none
