@@ -4,7 +4,7 @@ ADD . /srv/jekyll
 
 WORKDIR /srv/jekyll
 
-RUN chmod a+w Gemfile.lock
+COPY --chown=docker:docker Gemfile.lock ./srv/jekyll
 
 RUN jekyll build
 

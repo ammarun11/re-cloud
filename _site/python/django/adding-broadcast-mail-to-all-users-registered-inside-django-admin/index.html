@@ -1,6 +1,6 @@
 <!doctype html>
 <!--
-  Minimal Mistakes Jekyll Theme 4.20.2 by Michael Rose
+  Minimal Mistakes Jekyll Theme 4.22.0 by Michael Rose
   Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
   Free for personal and commercial use under the MIT license
   https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
@@ -23,7 +23,7 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:site_name" content="My Personal Ngoprek Problems >_">
 <meta property="og:title" content="Adding BroadCast Mail to All Users Registered inside Django Admin">
-<meta property="og:url" content="http://localhost:4000/python/django/adding-broadcast-mail-to-all-users-registered-inside-django-admin/">
+<meta property="og:url" content="http://0.0.0.0:4000/python/django/adding-broadcast-mail-to-all-users-registered-inside-django-admin/">
 
 
   <meta property="og:description" content="Adding BroadCast Mail to All User Registered in Django Admin. This is my last problem, we need custom default Django Admin to can submit BroadCast mail to All User. Because this is perfectly to make a promotions.">
@@ -41,7 +41,7 @@
 
 
 
-<link rel="canonical" href="http://localhost:4000/python/django/adding-broadcast-mail-to-all-users-registered-inside-django-admin/">
+<link rel="canonical" href="http://0.0.0.0:4000/python/django/adding-broadcast-mail-to-all-users-registered-inside-django-admin/">
 
 
 
@@ -52,7 +52,7 @@
     
       "@type": "Person",
       "name": null,
-      "url": "http://localhost:4000/"
+      "url": "http://0.0.0.0:4000/"
     
   }
 </script>
@@ -67,7 +67,9 @@
 <!-- end _includes/seo.html -->
 
 
-<link href="/feed.xml" type="application/atom+xml" rel="alternate" title="My Personal Ngoprek Problems >_ Feed">
+
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="My Personal Ngoprek Problems >_ Feed">
+
 
 <!-- https://t.co/dKP3o1e -->
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -94,7 +96,6 @@
     }
   </style>
 <![endif]-->
-
 
 
     <!-- start custom head snippets -->
@@ -135,7 +136,7 @@
             </li><li class="masthead__menu-item">
               <a href="/posts/">📝 Blog</a>
             </li><li class="masthead__menu-item">
-              <a href="/404.html">🏆 Projects</a>
+              <a href="/404.html">🏆 Projectss</a>
             </li><li class="masthead__menu-item">
               <a href="/categories/">📚 Categories</a>
             </li><li class="masthead__menu-item">
@@ -331,13 +332,13 @@
 
 <p><strong>1.</strong> In your <code class="language-plaintext highlighter-rouge">models.py</code></p>
 
-<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="k">class</span> <span class="nc">BroadCast_Email</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
-    <span class="n">subject</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">200</span><span class="p">)</span>
-    <span class="n">created</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">DateTimeField</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="n">timezone</span><span class="o">.</span><span class="n">now</span><span class="p">)</span>
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="k">class</span> <span class="nc">BroadCast_Email</span><span class="p">(</span><span class="n">models</span><span class="p">.</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">subject</span> <span class="o">=</span> <span class="n">models</span><span class="p">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">200</span><span class="p">)</span>
+    <span class="n">created</span> <span class="o">=</span> <span class="n">models</span><span class="p">.</span><span class="n">DateTimeField</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="n">timezone</span><span class="p">.</span><span class="n">now</span><span class="p">)</span>
     <span class="n">message</span> <span class="o">=</span> <span class="n">RichTextUploadingField</span><span class="p">()</span>
 
     <span class="k">def</span> <span class="nf">__unicode__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">subject</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="p">.</span><span class="n">subject</span>
 
     <span class="k">class</span> <span class="nc">Meta</span><span class="p">:</span>
         <span class="n">verbose_name</span> <span class="o">=</span> <span class="s">"BroadCast Email to all Member"</span>
@@ -355,37 +356,37 @@
 <span class="kn">from</span> <span class="nn">django.core.mail</span> <span class="kn">import</span> <span class="p">(</span><span class="n">send_mail</span><span class="p">,</span> <span class="n">BadHeaderError</span><span class="p">,</span> <span class="n">EmailMessage</span><span class="p">)</span>
 <span class="kn">from</span> <span class="nn">django.contrib.auth.models</span> <span class="kn">import</span> <span class="n">User</span>
 
-<span class="k">class</span> <span class="nc">EmailThread</span><span class="p">(</span><span class="n">threading</span><span class="o">.</span><span class="n">Thread</span><span class="p">):</span>
+<span class="k">class</span> <span class="nc">EmailThread</span><span class="p">(</span><span class="n">threading</span><span class="p">.</span><span class="n">Thread</span><span class="p">):</span>
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">subject</span><span class="p">,</span> <span class="n">html_content</span><span class="p">,</span> <span class="n">recipient_list</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">subject</span> <span class="o">=</span> <span class="n">subject</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">recipient_list</span> <span class="o">=</span> <span class="n">recipient_list</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">html_content</span> <span class="o">=</span> <span class="n">html_content</span>
-        <span class="n">threading</span><span class="o">.</span><span class="n">Thread</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">subject</span> <span class="o">=</span> <span class="n">subject</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">recipient_list</span> <span class="o">=</span> <span class="n">recipient_list</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">html_content</span> <span class="o">=</span> <span class="n">html_content</span>
+        <span class="n">threading</span><span class="p">.</span><span class="n">Thread</span><span class="p">.</span><span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="n">msg</span> <span class="o">=</span> <span class="n">EmailMessage</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">subject</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">html_content</span><span class="p">,</span> <span class="n">settings</span><span class="o">.</span><span class="n">EMAIL_HOST_USER</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">recipient_list</span><span class="p">)</span>
-        <span class="n">msg</span><span class="o">.</span><span class="n">content_subtype</span> <span class="o">=</span> <span class="s">"html"</span>
+        <span class="n">msg</span> <span class="o">=</span> <span class="n">EmailMessage</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">subject</span><span class="p">,</span> <span class="bp">self</span><span class="p">.</span><span class="n">html_content</span><span class="p">,</span> <span class="n">settings</span><span class="p">.</span><span class="n">EMAIL_HOST_USER</span><span class="p">,</span> <span class="bp">self</span><span class="p">.</span><span class="n">recipient_list</span><span class="p">)</span>
+        <span class="n">msg</span><span class="p">.</span><span class="n">content_subtype</span> <span class="o">=</span> <span class="s">"html"</span>
         <span class="k">try</span><span class="p">:</span>
-            <span class="n">msg</span><span class="o">.</span><span class="n">send</span><span class="p">()</span>
+            <span class="n">msg</span><span class="p">.</span><span class="n">send</span><span class="p">()</span>
         <span class="k">except</span> <span class="n">BadHeaderError</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">HttpResponse</span><span class="p">(</span><span class="s">'Invalid header found.'</span><span class="p">)</span>
 
-<span class="k">class</span> <span class="nc">BroadCast_Email_Admin</span><span class="p">(</span><span class="n">admin</span><span class="o">.</span><span class="n">ModelAdmin</span><span class="p">):</span>
-    <span class="n">model</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">BroadCast_Email</span>
+<span class="k">class</span> <span class="nc">BroadCast_Email_Admin</span><span class="p">(</span><span class="n">admin</span><span class="p">.</span><span class="n">ModelAdmin</span><span class="p">):</span>
+    <span class="n">model</span> <span class="o">=</span> <span class="n">models</span><span class="p">.</span><span class="n">BroadCast_Email</span>
 
     <span class="k">def</span> <span class="nf">submit_email</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">obj</span><span class="p">):</span> <span class="c1">#`obj` is queryset, so there we only use first selection, exacly obj[0]
-</span>        <span class="n">list_email_user</span> <span class="o">=</span> <span class="p">[</span> <span class="n">p</span><span class="o">.</span><span class="n">email</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">User</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="nb">all</span><span class="p">()</span> <span class="p">]</span> <span class="c1">#: if p.email != settings.EMAIL_HOST_USER   #this for exception
+</span>        <span class="n">list_email_user</span> <span class="o">=</span> <span class="p">[</span> <span class="n">p</span><span class="p">.</span><span class="n">email</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">User</span><span class="p">.</span><span class="n">objects</span><span class="p">.</span><span class="nb">all</span><span class="p">()</span> <span class="p">]</span> <span class="c1">#: if p.email != settings.EMAIL_HOST_USER   #this for exception
 </span>        <span class="n">obj_selected</span> <span class="o">=</span> <span class="n">obj</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-        <span class="n">EmailThread</span><span class="p">(</span><span class="n">obj_selected</span><span class="o">.</span><span class="n">subject</span><span class="p">,</span> <span class="n">mark_safe</span><span class="p">(</span><span class="n">obj_selected</span><span class="o">.</span><span class="n">message</span><span class="p">),</span> <span class="n">list_email_user</span><span class="p">)</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
-    <span class="n">submit_email</span><span class="o">.</span><span class="n">short_description</span> <span class="o">=</span> <span class="s">'Submit BroadCast (1 Select Only)'</span>
-    <span class="n">submit_email</span><span class="o">.</span><span class="n">allow_tags</span> <span class="o">=</span> <span class="bp">True</span>
+        <span class="n">EmailThread</span><span class="p">(</span><span class="n">obj_selected</span><span class="p">.</span><span class="n">subject</span><span class="p">,</span> <span class="n">mark_safe</span><span class="p">(</span><span class="n">obj_selected</span><span class="p">.</span><span class="n">message</span><span class="p">),</span> <span class="n">list_email_user</span><span class="p">).</span><span class="n">start</span><span class="p">()</span>
+    <span class="n">submit_email</span><span class="p">.</span><span class="n">short_description</span> <span class="o">=</span> <span class="s">'Submit BroadCast (1 Select Only)'</span>
+    <span class="n">submit_email</span><span class="p">.</span><span class="n">allow_tags</span> <span class="o">=</span> <span class="bp">True</span>
 
     <span class="n">actions</span> <span class="o">=</span> <span class="p">[</span> <span class="s">'submit_email'</span> <span class="p">]</span>
 
     <span class="n">list_display</span> <span class="o">=</span> <span class="p">(</span><span class="s">"subject"</span><span class="p">,</span> <span class="s">"created"</span><span class="p">)</span>
     <span class="n">search_fields</span> <span class="o">=</span> <span class="p">[</span><span class="s">'subject'</span><span class="p">,]</span>
 
-<span class="n">admin</span><span class="o">.</span><span class="n">site</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">BroadCast_Email</span><span class="p">,</span> <span class="n">BroadCast_Email_Admin</span><span class="p">)</span></code></pre></figure>
+<span class="n">admin</span><span class="p">.</span><span class="n">site</span><span class="p">.</span><span class="n">register</span><span class="p">(</span><span class="n">models</span><span class="p">.</span><span class="n">BroadCast_Email</span><span class="p">,</span> <span class="n">BroadCast_Email_Admin</span><span class="p">)</span></code></pre></figure>
 
 <hr />
 
@@ -406,19 +407,13 @@
 
 
   
-  
-  
 
   <p class="page__taxonomy">
     <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
     <span itemprop="keywords">
     
-      
-      
       <a href="/categories/#django" class="page__taxonomy-item" rel="tag">django</a><span class="sep">, </span>
     
-      
-      
       <a href="/categories/#python" class="page__taxonomy-item" rel="tag">python</a>
     
     </span>
@@ -434,11 +429,11 @@
       <section class="page__share">
   
 
-  <a href="https://twitter.com/intent/tweet?text=Adding+BroadCast+Mail+to+All+Users+Registered+inside+Django+Admin%20http%3A%2F%2Flocalhost%3A4000%2Fpython%2Fdjango%2Fadding-broadcast-mail-to-all-users-registered-inside-django-admin%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+  <a href="https://twitter.com/intent/tweet?text=Adding+BroadCast+Mail+to+All+Users+Registered+inside+Django+Admin%20http%3A%2F%2F0.0.0.0%3A4000%2Fpython%2Fdjango%2Fadding-broadcast-mail-to-all-users-registered-inside-django-admin%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
 
-  <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A4000%2Fpython%2Fdjango%2Fadding-broadcast-mail-to-all-users-registered-inside-django-admin%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+  <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2F0.0.0.0%3A4000%2Fpython%2Fdjango%2Fadding-broadcast-mail-to-all-users-registered-inside-django-admin%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
 
-  <a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Flocalhost%3A4000%2Fpython%2Fdjango%2Fadding-broadcast-mail-to-all-users-registered-inside-django-admin%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2F0.0.0.0%3A4000%2Fpython%2Fdjango%2Fadding-broadcast-mail-to-all-users-registered-inside-django-admin%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
 </section>
 
 
@@ -695,11 +690,13 @@ POD Network Routes (Kubernetes The Hardway)
       
     
 
-    <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+    
+      <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+    
   </ul>
 </div>
 
-<div class="page__footer-copyright">&copy; 2020 My Personal Ngoprek Problems >_. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+<div class="page__footer-copyright">&copy; 2021 My Personal Ngoprek Problems >_. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
 
       </footer>
     </div>
@@ -721,7 +718,7 @@ POD Network Routes (Kubernetes The Hardway)
     
   <script>
     var disqus_config = function () {
-      this.page.url = "http://localhost:4000/python/django/adding-broadcast-mail-to-all-users-registered-inside-django-admin/";  /* Replace PAGE_URL with your page's canonical URL variable */
+      this.page.url = "http://0.0.0.0:4000/python/django/adding-broadcast-mail-to-all-users-registered-inside-django-admin/";  /* Replace PAGE_URL with your page's canonical URL variable */
       this.page.identifier = "/python/django/adding-broadcast-mail-to-all-users-registered-inside-django-admin"; /* Replace PAGE_IDENTIFIER with your page's unique identifier variable */
     };
     (function() { /* DON'T EDIT BELOW THIS LINE */
