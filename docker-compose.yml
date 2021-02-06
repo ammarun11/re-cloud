@@ -3,7 +3,7 @@ version: "3"
 services:
   web:
     container_name: web
-    image: palopalepalo/paloblog:${{ github.sha }}
+    image: palopalepalo/noteapp:${{ github.sha }}
     restart: always
 #    build: .
     ports:
